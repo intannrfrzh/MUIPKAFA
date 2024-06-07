@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
 @include('partial.head')
 <style>
     /* Global styles */
@@ -83,23 +84,41 @@
         {{-- Sidebar --}}
         @include('partial.sidebar_student')
         
-        <!-- additional content bar -->
-<div class="addconbar">
-<div class="add-container">
-  <h1>additional content</h1>
-  </div>
-</div>
         
             {{-- Content --}}
         <div class="content">
-            <!-- Search bar container -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <button><i class="fa fa-search"></i></button>
-        </div>
+            <h1>STUDENT RESULT</h1>
+            <hr>
+            <p>STUDENT NAME : </p>
+            
+            <p>STUDENT ID : </p>
 
-            <h1>VIEW RESULT STUDENT</h1>
-            <p>This is the main content area.</p>
+            <table class="table table-bordered">
+                <thead>
+                <th>
+                    CODE
+                </th>
+                <th>
+                    SUBJECT NAME
+                </th>
+                <th>
+                    GRADE
+                </th>
+                </thead>
+
+                <tbody class="table-group-divider">
+                <tr>
+
+                </tr>
+                <tr>
+                    
+                </tr>
+                <tr>
+                    
+                </tr>
+                </tbody>
+            </table>
+
         </div>
     </div>
 
