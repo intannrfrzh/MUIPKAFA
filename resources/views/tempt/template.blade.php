@@ -81,7 +81,7 @@
     {{-- Main layout --}}
     <div class="main-layout">
         {{-- Sidebar --}}
-        @include('partial.sidebar')
+        @include('partial.sidebar_student')
         
         <!-- additional content bar -->
 <div class="addconbar">
