@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('P_Payment_date');
             $table->time('P_Payment_time');
             $table->string('P_Payment_status');
+
+            $table->foreign('I_Parent_ID')->references('I_Parent_ID')->on('parent');
         });
     }
 
