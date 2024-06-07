@@ -1,14 +1,13 @@
-<!-- Sprofile bar -->
-<div class="profilebar">
-<div class="profile-container">
-  <i class="fa fa-bell-o" aria-hidden="true"></i>
-  <img src="{{ asset('image/jamal.jpg') }}" alt="Profile" class="profile-img">
+<!-- additional content bar -->
+<div class="addconbar">
+<div class="add-container">
+  <h1>additional content</h1>
   </div>
 </div>
 
 
 <style>
-.profilebar{
+.addconbar{
     position: fixed; /* Fixed positioning to keep it at the right side */
     right: 0; /* Position it at the right side */
     height: 100vh; /* Set the height to full viewport height */
@@ -23,27 +22,6 @@
     justify-content: flex-start; /* Align items to the start (top) of the container */
 }
 
-/*bell icon*/
-.profilebar i{
-    margin-right: 10px;
-    font-size: 30px;
-    width: 50px;
-    text-align: center; /* Center the icon */
-}
 
-/* Circular profile image */
-.profile-img {
-    border-radius: 50%; /* Make the image circular */
-    width: 60px; /* Set the width */
-    height: 60px; /* Set the height */
-    object-fit: cover; /* Ensure the image covers the circular frame */
-    margin-top: 10px; /* Add some space between the title and image */
-}
-
-/* Container for the icon and profile image */
-.profile-container {
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Center items vertically */ 
-        }
 
 </style>
