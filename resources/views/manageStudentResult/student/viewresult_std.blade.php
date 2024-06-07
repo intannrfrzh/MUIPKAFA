@@ -98,7 +98,7 @@
             <button><i class="fa fa-search"></i></button>
         </div>
 
-            <h1>Main Content</h1>
+            <h1>VIEW RESULT STUDENT</h1>
             <p>This is the main content area.</p>
         </div>
     </div>
