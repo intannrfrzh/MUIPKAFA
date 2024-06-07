@@ -208,7 +208,7 @@ h1 {
 @section('content')
 <div class="container">
     <h1>Manage Activities</h1>
-    <a href="{{ route('activities.create') }}" class="btn btn-primary">Add Activity</a>
+    <a href="{{ route('viewActivitiesAdmin') }}" class="btn btn-primary">Add Activity</a>
     <table class="table mt-4">
         <thead>
             <tr>

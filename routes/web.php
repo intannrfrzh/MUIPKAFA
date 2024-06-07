@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\studentResultController;
+use App\Http\Controllers\adminActivitiesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,9 +9,8 @@ Route::get('/', function () {
     //return view('welcome');
 });
 
-Route::get('/resources/views/manageStudentResult/student/viewresult_std', [studentResultController::class, 'viewResult'])->name('student.result');
-
-
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/resources/views/KAFAactivities/viewActivitiesAdmin', [adminActivitiesController::class, 'viewActivitiesAdmin'])->name('viewActivitiesAdmin');
