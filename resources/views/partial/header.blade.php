@@ -1,15 +1,17 @@
+
 <body>
     <header class="header">
         <!-- Logo -->
         <div class="logo">
             <img src="{{ asset('image/logokafa.png') }}" alt="Logo" class="d-inline-block align-text-top">
         </div>
-        <!-- Search bar container -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <button><i class="fa fa-search"></i></button>
-        </div>
-    </header>
+        
+        <!--notification icon-->
+        <i class="fa fa-bell-o" aria-hidden="true"></i>
+
+        <!-- Profile session -->
+         
+    </header>   
 </body>
 
 <style>
@@ -33,27 +35,20 @@
         margin-right: 10px;
     }
 
-    /* Search bar styles */
-    .search-bar {
-        background-color: #fff;
-        border-radius: 20px;
-        padding: 5px 10px;
-        display: flex;
-        align-items: center;
-    }
 
-    .search-bar input[type="text"] {
-        border: none;
-        outline: none;
-        padding: 5px;
-        font-size: 16px;
-        width: 200px;
-    }
 
-    .search-bar button {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-    }
+    /*bell icon*/
+.profilebar i{
+    margin-right: 10px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center; /* Center the icon */
+}
+
+
+/* Container for the icon and profile image */
+.profile-container {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Center items vertically */ 
+}
 </style>
