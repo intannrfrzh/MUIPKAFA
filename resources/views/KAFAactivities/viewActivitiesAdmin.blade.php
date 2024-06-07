@@ -191,7 +191,7 @@
         @include('partial.sidebar')
 
         {{-- Profile bar --}}
-        @include('partial.profilebar')
+        {{--@include('partial.profilebar')--}}
 
         {{-- Content --}}
         <div class="content">
@@ -222,7 +222,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('edit', $activity->A_Activity_ID) }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('editActivities', $activity->A_Activity_ID) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('destroy', $activity->A_Activity_ID) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

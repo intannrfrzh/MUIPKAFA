@@ -15,9 +15,10 @@ Auth::routes();
 
 Route::get('/resources/views/KAFAactivities/viewActivitiesAdmin', [adminActivitiesController::class, 'viewActivitiesAdmin'])->name('viewActivitiesAdmin');
 Route::get('/resources/views/KAFAactivities/addActivities', [adminActivitiesController::class, 'create'])->name('create');
-Route::post('/resources/views/KAFAactivities/editActivities/{id}', [adminActivitiesController::class, 'edit'])->name('edit');
-Route::post('/resources/views/KAFAactivities/updateActivities/{id}', [adminActivitiesController::class, 'update'])->name('update');
-Route::get('/resources/views/KAFAactivities/deleteActivities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
+Route::post('/resources/views/KAFAactivities', [adminActivitiesController::class, 'store'])->name('store');
+Route::get('/resources/views/KAFAactivities/{A_Activity_ID}/editActivities', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
+Route::put('/resources/views/KAFAactivities/{A_Activity_ID}', [adminActivitiesController::class, 'update'])->name('update');
+Route::delete('/resources/views/KAFAactivities/{A_Activity_ID}', [adminActivitiesController::class, 'destroy'])->name('destroy');
 
 /*Route::prefix('admin')->group(function () {
     Route::get('/activities', [AdminActivitiesController::class, 'viewActivitiesAdmin'])->name('admin.viewActivitiesAdmin');

@@ -83,12 +83,12 @@
         {{-- Sidebar --}}
         @include('partial.sidebar_admin')
         
-        <!-- additional content bar -->
+        <!-- additional content bar 
 <div class="addconbar">
 <div class="add-container">
   <h1>additional content</h1>
   </div>
-</div>
+</div>-->
         
             {{-- Content --}}
         <div class="content">

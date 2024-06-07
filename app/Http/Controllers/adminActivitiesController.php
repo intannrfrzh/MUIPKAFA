@@ -19,7 +19,7 @@ class AdminActivitiesController extends Controller
     // To show the form for creating a new activity
     public function create()
     {
-        return view('KAFAactivities.create');
+        return view('KAFAactivities.addActivities');
     }
 
     // To store a newly created activity in the database
@@ -41,10 +41,10 @@ class AdminActivitiesController extends Controller
     }
 
     // To show the form for editing an existing activity
-    public function edit($id)
+    public function editActivities($id)
     {
         $activity = activities::findOrFail($id);
-        return view('KAFAactivities.edit', compact('activity'));
+        return view('KAFAactivities.editActivities', compact('activity'));
     }
 
     // To update the specified activity in the database
