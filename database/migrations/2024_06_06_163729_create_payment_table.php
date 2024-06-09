@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment', function (Blueprint $table) {
-            $table->string('P_Payment_ID')->primary();
+            $table->id();
             $table->string('I_Parent_ID');
             $table->integer('P_Payment_total');
             $table->date('P_Payment_date');
             $table->time('P_Payment_time');
             $table->string('P_Payment_status');
 
-            $table->foreign('I_Parent_ID')->references('I_Parent_ID')->on('parent');
+            $table->foreign('I_Parent_ID')->references('User_ID')->on('parent');
         });
     }
 

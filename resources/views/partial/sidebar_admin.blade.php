@@ -15,7 +15,7 @@
           Profile</a>
       </li>
       <li>
-      <a href="{{ route('viewActivitiesAdmin') }}" class="nav-link">
+      <a href="{{ route('listActivitiesAdmin') }}" class="nav-link">
         <i class="fa fa-tasks" aria-hidden="true"></i>
           Activities</a>
       </li>

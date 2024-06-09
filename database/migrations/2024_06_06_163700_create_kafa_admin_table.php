@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kafa_admin', function (Blueprint $table) {
-            $table->string("K_Admin_ID")->primary(); 
-            $table->string("K_Admin_name");
+            $table->string("User_ID");
+            $table->string("K_Admin_name")->primary();;
             $table->string("K_Admin_IC");
             $table->string("K_Admin_email");
             $table->string("K_Admin_phone_no");
+
+            $table->foreign('User_ID')->references('User_ID')->on('users');
         });
     }
 

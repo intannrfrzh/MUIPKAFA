@@ -12,19 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->string('A_Activity_ID')->primary();
-            $table->string('K_Admin_ID');
-            $table->string('J_Admin_ID');
-            $table->string('T_Teacher_ID');
+            $table->id();
+            //$table->string('K_Admin_ID')->default('default_value');
+            //$table->string('J_Admin_ID')->default('default_value');
             $table->string('A_Activity_name');
             $table->string('A_Activity_details');
-            $table->date('A_Activity_date');
-            $table->time('A_Activity_time');
+            $table->date('A_Activity_datestart');
+            $table->date('A_Activity_dateend');
+            $table->time('A_Activity_timestart');
+            $table->time('A_Activity_timeend');
+            $table->string('A_Activity_status')->default('pending');
 
             
-            $table->foreign('K_Admin_ID')->references('K_Admin_ID')->on('kafa_admin');
-            $table->foreign('J_Admin_ID')->references('J_Admin_ID')->on('jaip_admin');
-            $table->foreign('T_Teacher_ID')->references('T_Teacher_ID')->on('teacher');
+            $table->foreign('K_Admin_ID')->references('User_ID')->on('kafa_admin');
+            $table->foreign('J_Admin_ID')->references('User_ID')->on('jaip_admin');
         });
     }
 

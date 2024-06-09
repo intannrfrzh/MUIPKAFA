@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("T_Teacher_ID");
             $table->string('S_Subject_name');
             
-            $table->foreign("T_Teacher_ID")->references("T_Teacher_ID")->on("teacher");
+            $table->foreign("T_Teacher_ID")->references("User_ID")->on("teacher");
         });
     }
 

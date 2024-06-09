@@ -1,49 +1,28 @@
-<!-- resources/views/KAFAactivities/edit.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     @include('partial.head')
     <style>
+        /* Global styles */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             height: 100vh;
+            background-color: #f4f4f9;
+            color: #333;
         }
 
+        /* Main layout styles */
         .main-layout {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        .content {
-            flex: 1;
-            background-color: #fff;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        .container {
-            margin: 20px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
+        /* Sidebar styles */
         .sidebar {
             width: 200px;
             position: fixed;
@@ -72,9 +51,28 @@
             background: #4b537d;
         }
 
+        /* Content styles */
         .content {
             margin-left: 220px;
             padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        .container {
+            margin: 20px;
+            max-width: 800px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #394264;
         }
 
         .form-group {
@@ -83,80 +81,183 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
             font-weight: bold;
+            margin-bottom: 5px;
+            color: #394264;
         }
 
         .form-group input,
         .form-group textarea {
-            width: 100%;
+            width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
         .form-group button {
+            display: inline-block;
             padding: 10px 20px;
-            background-color: #394264;
+            background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .form-group button:hover {
-            background-color: #4b537d;
+            background-color: #0056b3;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 50, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            z-index: 1000;
+        }
+
+        .popup button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Overlay styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .container {
+                margin: 20px auto;
+                width: calc(100% - 40px);
+            }
         }
     </style>
 </head>
 
 <body>
+    {{-- Header --}}
     @include('partial.header')
 
+    {{-- Main layout --}}
     <div class="main-layout">
+        {{-- Sidebar --}}
         @include('partial.sidebar')
 
-        @include('partial.profilebar')
+        {{-- Profile bar --}}
+        {{-- @include('partial.profilebar') --}}
 
+        {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1>Edit Activity</h1>
-                
-                @foreach($activities as $activity)
-
-                <form action="{{ route('editActivities', $activity->A_Activity_ID) }}" method="POST">
+                <h1>UPDATE ACTIVITY</h1>
+                <form id="updateForm" action="{{ route('update', $activity->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-
                     <div class="form-group">
-                        <label for="A_Activity_name">Title:</label>
-                        <input type="text" id="A_Activity_name" name="A_Activity_name" value="{{ $activity->A_Activity_name }}" required>
+                        <label for="A_Activity_name">TITLE:</label>
+                        <input placeholder="activity name" type="text" id="A_Activity_name" name="A_Activity_name" value="{{ $activity->A_Activity_name }}" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="A_Activity_details">Purpose:</label>
-                        <textarea id="A_Activity_details" name="A_Activity_details" required>{{ $activity->A_Activity_details }}</textarea>
+                        <label for="A_Activity_details">PURPOSE:</label>
+                        <textarea placeholder="purpose of the activity" id="A_Activity_details" name="A_Activity_details" required>{{ $activity->A_Activity_details }}</textarea>
                     </div>
-
                     <div class="form-group">
-                        <label for="A_Activity_date">Date:</label>
-                        <input type="date" id="A_Activity_date" name="A_Activity_date" value="{{ $activity->A_Activity_date }}" required>
+                        <label for="A_Activity_datestart">START DATE:</label>
+                        <input type="date" id="A_Activity_datestart" name="A_Activity_datestart" value="{{ $activity->A_Activity_datestart }}" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="A_Activity_time">Time:</label>
-                        <input type="time" id="A_Activity_time" name="A_Activity_time" value="{{ $activity->A_Activity_time }}" required>
+                        <label for="A_Activity_dateend">END DATE:</label>
+                        <input type="date" id="A_Activity_dateend" name="A_Activity_dateend" value="{{ $activity->A_Activity_dateend }}" required>
                     </div>
-
                     <div class="form-group">
-                        <button type="submit">Update</button>
+                        <label for="A_Activity_timestart">START TIME:</label>
+                        <input type="time" id="A_Activity_timestart" name="A_Activity_timestart" value="{{ $activity->A_Activity_timestart }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="A_Activity_timeend">END TIME:</label>
+                        <input type="time" id="A_Activity_timeend" name="A_Activity_timeend" value="{{ $activity->A_Activity_timeend }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                    <button type="button" onclick="showPopup()">Update Activity</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+    {{-- Popup --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <p>The content will be changed! Continue?</p>
+        <button onclick="confirmUpdate()">Confirm</button>
+        <button onclick="closePopup()">Cancel</button>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function confirmUpdate() {
+            document.getElementById('updateForm').submit();
+        }
+    </script>
 </body>
 
 </html>

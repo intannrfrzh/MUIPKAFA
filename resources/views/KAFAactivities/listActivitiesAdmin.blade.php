@@ -246,12 +246,15 @@
         {{-- Sidebar --}}
         @include('partial.sidebar')
 
+        {{-- Profile bar --}}
+        {{--@include('partial.profilebar')--}}
+
         {{-- Content --}}
         <div class="content">
             <div class="container">
                 <h1>MANAGE ACTIVITIES</h1>
-
                 <h2>Pending Approval</h2>
+                <a href="{{ route('create') }}" class="btn btn-primary">ADD ACTIVITY </a>
                 <table class="table mt-4">
                     <thead>
                         <tr>
@@ -261,6 +264,7 @@
                             <th>End Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -273,17 +277,17 @@
                             <td>{{ $activity->A_Activity_dateend }}</td>
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
+                            <td><!--{{ $activity->A_Activity_status }}-->
+                                <span class="status {{ strtolower($activity->A_Activity_status) }}">
+                                    {{ ucfirst($activity->A_Activity_status) }}
+                                </span>
+                            </td>
                             <td>
-                                <form action="{{ route('approve', $activity->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-success">APPROVE</button>
-                                </form>
-                                <form action="{{ route('reject', $activity->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">REJECT</button>
-                                </form>
+                            <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('editActivities', $activity->id) }}" class="btn btn-warning">EDIT</a>
+                                
+                                <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
+                                
                             </td>
                         </tr>
                         @endforeach
@@ -314,30 +318,18 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
-                                <span class="status {{ strtolower($activity->A_Activity_status) }}">
+                            <span class="status approved">
                                     {{ ucfirst($activity->A_Activity_status) }}
                                 </span>
                             </td>
                             <td>
                                 <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
-                                <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-warning">CHANGE</button>
-                                </form>
                             </td>
                         </tr>
                         @endforeach
-                @foreach($approvedActivities as $activity)
-                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                </form>
-                @endforeach
-                </tbody>
+                    </tbody>
                 </table>
-
                 <h2>Rejected Activities</h2>
                 <table class="table mt-4">
                     <thead>
@@ -362,33 +354,33 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
-                                <span class="status {{ strtolower($activity->A_Activity_status) }}">
+                                <span class="status rejected">
                                     {{ ucfirst($activity->A_Activity_status) }}
                                 </span>
                             </td>
                             <td>
                                 <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
-                                <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-warning">CHANGE</button>
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
                                 </form>
                             </td>
                         </tr>
                         @endforeach
-                @foreach($rejectedActivities as $activity)
-                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                </form>
-                
-                @endforeach
-                </tbody>
+                    </tbody>
                 </table>
-
             </div>
         </div>
+    </div>
+    
+    {{-- Popup --}}
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="deletePopup">
+        <p>Delete the selected activity?</p>
+            <button type="button" onclick="confirmDelete()">Confirm</button>
+            <button type="button" onclick="closeDeletePopup()">Cancel</button>
+        </form>
     </div>
 
     {{-- Popup --}}
@@ -407,7 +399,7 @@
             deleteActivityId = activityId;
             document.getElementById('deletePopup').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
-        }
+}
 
         function closeDeletePopup() {
             document.getElementById('deletePopup').style.display = 'none';

@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jaip_admin', function (Blueprint $table) {
-            $table->string('J_Admin_ID')->primary();
-            $table->string('J_Admin_name');
+            $table->string('User_ID');
+            $table->string('J_Admin_name')->primary();;
             $table->string('J_Admin_IC');
             $table->string('J_Admin_email');
             $table->string('J_Admin_phone_number');
+
+            $table->foreign('User_ID')->references('User_ID')->on('users');
         });
     }
 

@@ -5,20 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class activities extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'A_Activity_ID';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'K_Admin_ID',
-        'J_Admin_ID',
-        'T_Teacher_ID',
         'A_Activity_name',
         'A_Activity_details',
-        'A_Activity_date',
-        'A_Activity_time'
+        'A_Activity_datestart',
+        'A_Activity_timestart',
+        'A_Activity_status',
+        'A_Activity_dateend',
+        'A_Activity_timeend',
+        'A_Activity_status',
+        'K_Admin_ID',
     ];
 
     public $timestamps = false; // Assuming your table does not have created_at and updated_at columns
