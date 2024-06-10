@@ -1,44 +1,97 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+//module controller
+use App\Http\Controllers\KafaController;
+use App\Http\Controllers\MuipController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
+
+//activities controller
 use App\Http\Controllers\adminActivitiesController;
 use App\Http\Controllers\muipActivitiesController;
 use App\Http\Controllers\teacherActivitiesController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
+//result controller
+use App\Http\Controllers\AdminResultController;
+use App\Http\Controllers\TeacherResultController;
+use App\Http\Controllers\StudentResultController;
+
+
+
+//register routes
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
+
+// Login routes
+require __DIR__.'/auth.php';
+
+// Home route
 Route::get('/', function () {
-    return view('tempt/template');
-    //return view('welcome');
+    return view('tempt.home');
 });
 
-Auth::routes();
+// Role-based routes
+Route::middleware(['auth'])->group(function () {
+    // kafa Admin Routes
+    Route::middleware(['role:K_admin'])->group(function () {
+        Route::get('admin/home/{User_ID}', [KafaController::class, 'dashboard'])->name('admin.home');
+        
+         // Activities admin routes
+         Route::get('/admin/activities', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
+         Route::get('/admin/activities/create', [adminActivitiesController::class, 'create'])->name('create');
+         Route::post('/admin/activities/store', [adminActivitiesController::class, 'store'])->name('store');
+         Route::get('/admin/activities/{id}/edit', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
+         Route::put('/admin/activities/{id}', [adminActivitiesController::class, 'update'])->name('update');
+         Route::delete('/admin/activities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
+         Route::get('/admin/activities/{id}', [adminActivitiesController::class, 'show'])->name('show');
+         Route::put('/admin/activities/approve/{id}', [adminActivitiesController::class, 'approve'])->name('approveActivity');
+         Route::delete('/admin/activities/reject/{id}', [adminActivitiesController::class, 'reject'])->name('rejectActivity');
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+         // Result admin routes
 
-Route::get('/resources/views/KAFAactivities/listActivitiesAdmin', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
-Route::get('/resources/views/KAFAactivities/addActivities', [adminActivitiesController::class, 'create'])->name('create');
-Route::post('/resources/views/KAFAactivities/store', [adminActivitiesController::class, 'store'])->name('store');
-Route::get('/resources/views/KAFAactivities/{id}/editActivities', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
-Route::put('/resources/views/KAFAactivities/{id}', [adminActivitiesController::class, 'update'])->name('update');
-Route::delete('/resources/views/KAFAactivities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
-Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [adminActivitiesController::class, 'show'])->name('show');
-Route::put('/resources/views/KAFAactivities/approve/{id}', [AdminActivitiesController::class, 'approve'])->name('approveActivity');
-Route::delete('/resources/views/KAFAactivities/reject/{id}', [AdminActivitiesController::class, 'reject'])->name('rejectActivity');
+    });
 
-Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
-Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
-Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
-Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
-Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
+    //muip admin routes
+    Route::middleware(['role:J_admin'])->group(function () {
+        Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
 
-Route::get('/resources/views/KAFAactivities/viewListTeacher', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
-Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [teacherActivitiesController::class, 'show'])->name('show');
+        //activities muip routes
+        Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
+        Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
+        Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
+        Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
+        Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
+    });
 
-/*Route::prefix('admin')->group(function () {
-    Route::get('/activities', [AdminActivitiesController::class, 'listActivitiesAdmin'])->name('admin.listActivitiesAdmin');
-    Route::get('/activities/create', [AdminActivitiesController::class, 'create'])->name('admin.createActivity');
-    Route::post('/activities', [AdminActivitiesController::class, 'store'])->name('admin.storeActivity');
-    Route::get('/activities/{id}/edit', [AdminActivitiesController::class, 'edit'])->name('admin.editActivity');
-    Route::put('/activities/{id}', [AdminActivitiesController::class, 'update'])->name('admin.updateActivity');
-    Route::delete('/activities/{id}', [AdminActivitiesController::class, 'destroy'])->name('admin.destroyActivity');
-});*/
+    // Teacher Routes
+    Route::middleware(['role:teacher'])->group(function () {
+        Route::get('teacher/home/{User_ID}', [TeacherController::class, 'dashboard'])->name('teacher.home');
+
+        // Teacher Activities Route
+        Route::get('/resources/views/KAFAactivities/viewListTeacher', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
+        Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [teacherActivitiesController::class, 'show'])->name('show');
+
+        // Teacher Result Route
+        Route::get('/teacher/results/{User_ID}', [TeacherResultController::class, 'showResultsList'])->name('teacher.resultslist');
+        Route::get('/teacher/results/{User_ID}/{studentId}', [TeacherResultController::class, 'showStudentResults'])->name('teacher.viewresult');
+        Route::get('/teacher/add-result/{User_ID}/{studentId}', [TeacherResultController::class, 'addResultForm'])->name('teacher.addResult');
+        Route::post('/teacher/store-result/{User_ID}', [TeacherResultController::class, 'storeResult'])->name('teacher.storeResult');
+    });
+
+    // Student Routes
+    Route::middleware(['role:student'])->group(function () {
+        Route::get('student/home/{User_ID}', function ($User_ID) {
+            \Log::info("Accessing student home for User_ID: " . $User_ID);
+            return app(StudentController::class)->dashboard($User_ID);
+        })->name('student.home');
+
+        // Student Result Route
+        Route::get('/result/{User_ID}', [StudentResultController::class, 'viewResult'])->name('student.result');
+    });
+});
+
+// Logout Route
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

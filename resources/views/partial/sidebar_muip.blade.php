@@ -5,8 +5,8 @@
 <nav class="sidebar">
   <ul>
       <li>
-      <a href="#" class="nav-link">
-        <i class="fa fa-home" aria-hidden="true"></i>
+      <a href="{{ route('muip.home', ['User_ID' => $User_ID]) }}" class="nav-link">
+              <i class="fa fa-home" aria-hidden="true"></i>
           Home</a>
       </li>
       <li>

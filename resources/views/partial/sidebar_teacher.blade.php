@@ -5,7 +5,7 @@
 <nav class="sidebar">
   <ul>
       <li>
-      <a href="#" class="nav-link">
+      <a href="{{ route('teacher.home', ['User_ID' => $User_ID]) }}" class="nav-link">
         <i class="fa fa-home" aria-hidden="true"></i>
           Home</a>
       </li>
@@ -25,7 +25,7 @@
           Payment</a>
       </li>
       <li>
-      <a href="#" class="nav-link">
+      <a href="{{route('teacher.resultslist', ['User_ID' => $User_ID])}}" class="nav-link">
         <i class="fa fa-check-square-o"></i>
           Result</a>
       </li>

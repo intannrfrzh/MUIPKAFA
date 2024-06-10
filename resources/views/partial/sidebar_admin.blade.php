@@ -5,7 +5,7 @@
 <nav class="sidebar">
   <ul>
       <li>
-      <a href="#" class="nav-link">
+      <a href="{{ route('admin.home', ['User_ID' => $User_ID]) }}" class="nav-link">
         <i class="fa fa-home" aria-hidden="true"></i>
           Home</a>
       </li>

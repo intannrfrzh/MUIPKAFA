@@ -81,14 +81,14 @@
     {{-- Main layout --}}
     <div class="main-layout">
         {{-- Sidebar --}}
-        @include('partial.sidebar_admin')
+        @include('partial.sidebar_student', ['User_ID' => $User_ID])
         
-        <!-- additional content bar 
-<div class="addconbar">
-<div class="add-container">
-  <h1>additional content</h1>
-  </div>
-</div>-->
+        <!-- additional content bar
+        <div class="addconbar">
+        <div class="add-container">
+            <h1>additional content</h1>
+        </div>
+        </div> -->
         
             {{-- Content --}}
         <div class="content">
@@ -98,7 +98,7 @@
             <button><i class="fa fa-search"></i></button>
         </div>
 
-            <h1>Main Content</h1>
+            <h1> student Main Content</h1>
             <p>This is the main content area.</p>
         </div>
     </div>

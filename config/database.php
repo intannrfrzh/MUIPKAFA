@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ return [
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
+            'database' => env('DB_DATABASE', 'muip_kafa'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -57,6 +57,20 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+        ],
+        'muip_kafa' => [
+            'driver' => 'mysql',
+            'host' => env('MUIP_KAFA_DB_HOST', '127.0.0.1'),
+            'port' => env('MUIP_KAFA_DB_PORT', '3306'),
+            'database' => env('MUIP_KAFA_DB_DATABASE', 'muip_kafa'),
+            'username' => env('MUIP_KAFA_DB_USERNAME', 'root'),
+            'password' => env('MUIP_KAFA_DB_PASSWORD', ''),
+            'unix_socket' => env('MUIP_KAFA_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
         ],
 
         'mariadb' => [

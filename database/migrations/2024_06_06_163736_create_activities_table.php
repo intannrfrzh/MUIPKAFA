@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('A_Activity_status')->default('pending');
 
             
-            $table->foreign('K_Admin_ID')->references('User_ID')->on('kafa_admin');
-            $table->foreign('J_Admin_ID')->references('User_ID')->on('jaip_admin');
+            //$table->foreign('K_Admin_ID')->references('User_ID')->on('kafa_admin');
+            //$table->foreign('J_Admin_ID')->references('User_ID')->on('jaip_admin');
         });
     }
 

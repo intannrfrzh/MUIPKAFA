@@ -40,6 +40,31 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'jaipadmin' => [
+            'driver' => 'session',
+            'provider' => 'jaipadmins',
+        ],
+
+        'kafaadmin' => [
+            'driver' => 'session',
+            'provider' => 'kafaadmins',
+        ],
+
+        'teacher' => [
+            'driver' => 'session',
+            'provider' => 'teachers',
+        ],
+
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
     ],
 
     /*
@@ -62,8 +87,29 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\User::class,
         ],
+
+        'jaipadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\JaipAdmin::class,
+        ],
+        
+        'kafaadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\KafaAdmin::class,
+        ],
+        
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Teacher::class,
+        ],
+        
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\StudentRegistration::class,
+        ],
+    
 
         // 'users' => [
         //     'driver' => 'database',

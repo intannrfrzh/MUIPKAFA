@@ -83,12 +83,12 @@
         {{-- Sidebar --}}
         @include('partial.sidebar_admin')
         
-        <!-- additional content bar -->
-<div class="addconbar">
-<div class="add-container">
-  <h1>additional content</h1>
-  </div>
-</div>
+        <!-- additional content bar
+        <div class="addconbar">
+        <div class="add-container">
+            <h1>additional content</h1>
+        </div>
+        </div> -->
         
             {{-- Content --}}
         <div class="content">
@@ -98,7 +98,7 @@
             <button><i class="fa fa-search"></i></button>
         </div>
 
-            <h1>Main Content</h1>
+            <h1> Admin Main Content</h1>
             <p>This is the main content area.</p>
         </div>
     </div>
