@@ -51,4 +51,10 @@ class muipActivitiesController extends Controller
 
         return redirect()->route('verifyActivities')->with('success', 'Activity rejected successfully.');
     }
+
+    public function show($id)
+    {
+        $activity = activities::findOrFail($id);
+        return view('KAFAactivities.viewActivities', compact('activity'));
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\adminActivitiesController;
 use App\Http\Controllers\muipActivitiesController;
+use App\Http\Controllers\teacherActivitiesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,10 @@ Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesCo
 Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
 Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
 Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
+Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
 
+Route::get('/resources/views/KAFAactivities/viewListTeacher', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
+Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [teacherActivitiesController::class, 'show'])->name('show');
 
 /*Route::prefix('admin')->group(function () {
     Route::get('/activities', [AdminActivitiesController::class, 'listActivitiesAdmin'])->name('admin.listActivitiesAdmin');

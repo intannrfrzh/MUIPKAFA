@@ -252,7 +252,7 @@
         {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1>MANAGE ACTIVITIES</h1>
+                <center><h1><b>MANAGE ACTIVITIES</b></h1></center>
                 <h2>Pending Approval</h2>
                 <a href="{{ route('create') }}" class="btn btn-primary">ADD ACTIVITY </a>
                 <table class="table mt-4">
@@ -285,9 +285,11 @@
                             <td>
                             <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <a href="{{ route('editActivities', $activity->id) }}" class="btn btn-warning">EDIT</a>
-                                
-                                <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
-                                
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -324,7 +326,11 @@
                             </td>
                             <td>
                                 <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -360,10 +366,10 @@
                             </td>
                             <td>
                                 <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <form action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                    <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
                                 </form>
                             </td>
                         </tr>
@@ -378,17 +384,9 @@
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="deletePopup">
         <p>Delete the selected activity?</p>
-            <button type="button" onclick="confirmDelete()">Confirm</button>
-            <button type="button" onclick="closeDeletePopup()">Cancel</button>
+            <button type="button" onclick="confirmDelete()">CONFIRM</button>
+            <button type="button" onclick="closeDeletePopup()">CANCEL</button>
         </form>
-    </div>
-
-    {{-- Popup --}}
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="deletePopup">
-        <p>Delete the selected activity?</p>
-        <button type="button" onclick="confirmDelete()">Confirm</button>
-        <button type="button" onclick="closeDeletePopup()">Cancel</button>
     </div>
 
     <script>

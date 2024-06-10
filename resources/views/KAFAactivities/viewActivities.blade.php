@@ -198,7 +198,7 @@
         {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1>ACTIVITY DETAILS</h1>
+            <center><h1><b>ACTIVITY DETAILS</b></h1></center>
                 <div class="form-group">
                     <label for="A_Activity_name">TITLE:</label>
                     <input placeholder="activity name" type="text" id="A_Activity_name" name="A_Activity_name" value="{{ $activity->A_Activity_name }}" readonly>
@@ -227,9 +227,9 @@
                     <label for="A_Activity_status">STATUS:</label>
                     <input type="text" id="A_Activity_status" name="A_Activity_status" value="{{ ucfirst($activity->A_Activity_status) }}" readonly>
                 </div>
-                <div class="form-group">
-                    <a href="{{ route('listActivitiesAdmin') }}" class="btn btn-primary">Back to Activities</a>
-                </div>
+                <center><div class="form-group">
+                    <button class="btn btn-primary" onclick="history.back()">BACK</button>
+                </div></center>
             </div>
         </div>
     </div>

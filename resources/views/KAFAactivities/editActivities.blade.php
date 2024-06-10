@@ -163,6 +163,21 @@
             z-index: 999;
         }
 
+        /* Success message styles */
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #dff0d8;
+            color: #3c763d;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .content {
@@ -198,7 +213,7 @@
         {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1>UPDATE ACTIVITY</h1>
+            <center><h1><b>UPDATE ACTIVITY</b></h1></center>
                 <form id="updateForm" action="{{ route('update', $activity->id) }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -227,9 +242,15 @@
                         <input type="time" id="A_Activity_timeend" name="A_Activity_timeend" value="{{ $activity->A_Activity_timeend }}" required>
                     </div>
                     
-                    <div class="form-group">
-                    <button type="button" onclick="showPopup()">Update Activity</button>
-                    </div>
+                    <center><div class="form-group">
+                        <th>
+                        <button type="button" onclick="showPopup()">UPDATE</button>
+                        </th>
+                        <th>
+                        <button type="button" onclick="history.back()">BACK</button>
+                        </th>
+                    </div></center>
+                    
                 </form>
             </div>
         </div>
@@ -239,9 +260,10 @@
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <p>The content will be changed! Continue?</p>
-        <button onclick="confirmUpdate()">Confirm</button>
-        <button onclick="closePopup()">Cancel</button>
+        <button onclick="confirmUpdate()">CONFIRM</button>
+        <button onclick="closePopup()">CANCEL</button>
     </div>
+    <div class="success-message" id="success-message">Activity has been successfully updated!</div>
 
     <script>
         function showPopup() {
@@ -255,7 +277,12 @@
         }
 
         function confirmUpdate() {
+            // Show the success message
+            document.getElementById('success-message').style.display = 'block';
+            // timeout success message
+            setTimeout(function() {
             document.getElementById('updateForm').submit();
+            }, 1000);
         }
     </script>
 </body>

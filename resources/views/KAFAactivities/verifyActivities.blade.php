@@ -249,7 +249,7 @@
         {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1>MANAGE ACTIVITIES</h1>
+            <center><h1><b>MANAGE ACTIVITIES</b></h1></center>
 
                 <h2>Pending Approval</h2>
                 <table class="table mt-4">
@@ -274,6 +274,7 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
+                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <form action="{{ route('approve', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
@@ -395,8 +396,8 @@
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="deletePopup">
         <p>Delete the selected activity?</p>
-        <button type="button" onclick="confirmDelete()">Confirm</button>
-        <button type="button" onclick="closeDeletePopup()">Cancel</button>
+        <button type="button" onclick="confirmDelete()">CONFIRM</button>
+        <button type="button" onclick="closeDeletePopup()">CANCEL</button>
     </div>
 
     <script>

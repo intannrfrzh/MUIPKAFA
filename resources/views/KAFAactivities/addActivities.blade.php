@@ -174,7 +174,7 @@ echo
         {{-- Content --}}
         <div class="content">
             <div class="container">
-                <h1> ADD ACTIVITY</h1>
+            <center><h1><b> ADD ACTIVITY</b></h1></center>
                 <form action="{{ route('store') }}" method="POST">
                     @csrf
                     <div class="form-group">
