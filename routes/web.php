@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
          Route::put('/admin/activities/approve/{id}', [adminActivitiesController::class, 'approve'])->name('approveActivity');
          Route::delete('/admin/activities/reject/{id}', [adminActivitiesController::class, 'reject'])->name('rejectActivity');
 
+
          // Result admin routes
 
     });
@@ -58,12 +59,12 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:J_admin'])->group(function () {
         Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
 
-        //activities muip routes
-        Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
-        Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
-        Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
-        Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
-        Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
+       //activities muip routes
+       Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
+       Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
+       Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
+       Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
+       Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
     });
 
     // Teacher Routes
@@ -78,11 +79,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/teacher/results/{User_ID}', [TeacherResultController::class, 'showResultsList'])->name('teacher.resultslist');
         Route::get('/teacher/results/{User_ID}/{studentId}', [TeacherResultController::class, 'showStudentResults'])->name('teacher.viewresult');
         Route::get('/teacher/add-result/{User_ID}/{studentId}', [TeacherResultController::class, 'addResultForm'])->name('teacher.addResult');
-        Route::post('/teacher/store-result/{User_ID}', [TeacherResultController::class, 'storeResult'])->name('teacher.storeResult');
+        Route::post('/teacher/{User_ID}/student/{studentId}/results', [TeacherResultController::class, 'saveResult'])->name('teacher.saveResult');
+
     });
 
     // Student Routes
-    Route::middleware(['role:student'])->group(function () {
+        Route::middleware(['role:student'])->group(function () {
         Route::get('student/home/{User_ID}', function ($User_ID) {
             \Log::info("Accessing student home for User_ID: " . $User_ID);
             return app(StudentController::class)->dashboard($User_ID);

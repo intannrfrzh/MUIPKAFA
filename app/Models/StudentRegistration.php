@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +16,7 @@ class StudentRegistration extends Authenticatable
     protected $table = 'student_registration';
 
     // Specify the primary key
-    protected $primaryKey = 'SR_Student_Name';
+    protected $primaryKey = 'User_ID';
 
     // Specify any fields that can be mass assigned
     protected $fillable = [
@@ -30,25 +30,15 @@ class StudentRegistration extends Authenticatable
         'Sr_Student_phone_no'
     ];
 
-    // Hidden fields
-    protected $hidden = [
-        'Sr_Student_IC',
-    ];
-
-    // Define the password field for authentication
-    public function getAuthPassword()
-    {
-        return $this->Sr_Student_IC;
-    }
+    
     public function hasRole($role)
     {
         return $this->role === $role;
     }
 
     // Define the relationship with the student result
-    public function result()
+    public function results()
     {
-        return $this->hasOne(StudentResult::class, 'SR_Student_ID', 'User_ID');
+        return $this->hasMany(StudentResult::class, 'SR_Student_ID', 'User_ID');
     }
-
 }

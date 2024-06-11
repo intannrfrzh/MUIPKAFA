@@ -12,22 +12,16 @@ class Subject extends Model
     // Specify the connection to use
     protected $connection = 'muip_kafa';
 
-    // Specify the table
+    // Specify the table if it differs from the default 'subjects'
     protected $table = 'subject';
 
-    // Specify the primary key
+    // Specify the primary key if it differs from the default 'id'
     protected $primaryKey = 'S_Subject_ID';
 
     // Specify any fields that can be mass assigned
     protected $fillable = [
+        'S_Subject_ID',
         'T_Teacher_ID',
-        'S_Subject_name'
+        'S_Subject_name',
     ];
-
-    public function hasRole($role)
-    {
-        return $this->role === $role;
-    }
-    
 }
-

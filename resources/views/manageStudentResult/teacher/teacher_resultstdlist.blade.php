@@ -4,7 +4,6 @@
 <head>
     @include('partial.head')
     <style>
-        /* Global styles */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -13,14 +12,12 @@
             height: 100vh;
         }
 
-        /* Main layout styles */
         .main-layout {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* Content styles */
         .content {
             flex: 1;
             background-color: #fff;
@@ -28,52 +25,19 @@
             overflow-y: auto;
         }
 
-        /* Search bar styles */
-        .search-bar {
-            background-color: #f1f1f1;
-            border-radius: 20px;
-            padding: 5px 10px;
-            display: flex;
-            align-items: center;
-            width: 250px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .search-bar input[type="text"] {
-            border: none;
-            outline: none;
-            padding: 5px;
-            font-size: 16px;
-            width: 200px;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
         }
 
-        .search-bar button {
-            background-color: transparent;
-            border: none;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .addconbar {
-            position: fixed;
-            /* Fixed positioning to keep it at the right side */
-            right: 0;
-            /* Position it at the right side */
-            height: 100vh;
-            /* Set the height to full viewport height */
-            width: 180px;
-            background-color: #fff;
-            box-sizing: border-box;
-            border-left: 1px solid #89c0ef;
-            padding: 10px;
-            /* Added padding for content */
-            display: flex;
-            /* Use flexbox for alignment */
-            flex-direction: column;
-            /* Stack items vertically */
-            align-items: center;
-            /* Center items horizontally */
-            justify-content: flex-start;
-            /* Align items to the start (top) of the container */
+        th {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
@@ -87,39 +51,31 @@
             <h1>Student Results</h1>
             <hr>
 
-            <table class="table table-bordered">
+            <table>
                 <thead>
                     <tr>
                         <th>Student ID</th>
+                        <th>Student Name</th>
                         <th>Verification Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    @foreach ($students as $student)
+                <tbody>
+                    @foreach($list as $student)
                     <tr>
                         <td>{{ $student->User_ID }}</td>
+                        <td>{{ $student->SR_Student_Name }}</td>
+                        <td>{{ $student->R_Result_Verfication ?? 'No results found' }}</td>
                         <td>
-                            @if (isset($results[$student->User_ID]))
-                                @if ($results[$student->User_ID] !== null)
-                                    @foreach ($results[$student->User_ID] as $result)
-                                        <p>{{ $result->R_Result_Verfication }}</p>
-                                    @endforeach
-                                @else
-                                    <p>No results found</p>
-                                @endif
-                            @else
-                                <p>Please add the result</p>
-                            @endif
-                        </td>
-                        <td>
-                            @if (!isset($results[$student->User_ID]))
-                                <a href="{{ route('teacher.addResult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" class="btn btn-primary">
-                                    Add Result
+                        @if($student->R_Result_Verfication)
+                                <a href="{{ route('teacher.viewresult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                                    class="btn btn-primary">
+                                    View Results
                                 </a>
                             @else
-                                <a href="{{ route('teacher.viewresult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" class="btn btn-primary">
-                                    View Results
+                                <a href="{{ route('teacher.addResult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                                    class="btn btn-primary">
+                                    Add Result
                                 </a>
                             @endif
                         </td>

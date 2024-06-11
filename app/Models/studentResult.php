@@ -9,6 +9,8 @@ class StudentResult extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     // Specify the connection to use
     protected $connection = 'muip_kafa';
 
