@@ -78,11 +78,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/teacher/results/{User_ID}', [TeacherResultController::class, 'showResultsList'])->name('teacher.resultslist');
         Route::get('/teacher/results/{User_ID}/{studentId}', [TeacherResultController::class, 'showStudentResults'])->name('teacher.viewresult');
         Route::get('/teacher/add-result/{User_ID}/{studentId}', [TeacherResultController::class, 'addResultForm'])->name('teacher.addResult');
-        Route::post('/teacher/store-result/{User_ID}', [TeacherResultController::class, 'storeResult'])->name('teacher.storeResult');
+        Route::post('/teacher/{User_ID}/student/{studentId}/results', [TeacherResultController::class, 'saveResult'])->name('teacher.saveResult');
+
     });
 
     // Student Routes
-    Route::middleware(['role:student'])->group(function () {
+        Route::middleware(['role:student'])->group(function () {
         Route::get('student/home/{User_ID}', function ($User_ID) {
             \Log::info("Accessing student home for User_ID: " . $User_ID);
             return app(StudentController::class)->dashboard($User_ID);
