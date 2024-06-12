@@ -65,7 +65,7 @@
 <body>
     @include('partial.header', ['User_ID' => $User_ID])
     <div class="main-layout">
-    @include('partial.sidebar_teacher', ['User_ID' => $User_ID])
+    @include('partial.sidebar_admin', ['User_ID' => $User_ID])
 
     <div class="content">
         <h1>Results for {{ $student->SR_Student_Name }}</h1>
@@ -90,7 +90,7 @@
             </tbody>
         </table>
         <button class="print-button" onclick="window.print()">Print Results</button>
-        <a href="{{ route('teacher.resultslist', ['User_ID' => $User_ID]) }}" class="back-button">Back to Results List</a> 
+        <a href="{{ route('admin.resultslist', ['User_ID' => $User_ID]) }}" class="back-button">Back to Results List</a> 
     </div>
     
     

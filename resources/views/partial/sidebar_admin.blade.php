@@ -25,7 +25,7 @@
           Payment</a>
       </li>
       <li>
-      <a href="#" class="nav-link">
+      <a href="{{ route('admin.resultslist', ['User_ID' => $User_ID]) }}" class="nav-link">
         <i class="fa fa-check-square-o"></i>
           Result</a>
       </li>

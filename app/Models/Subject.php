@@ -24,4 +24,12 @@ class Subject extends Model
         'T_Teacher_ID',
         'S_Subject_name',
     ];
+
+    /**
+     * Define the relationship with the StudentResult model.
+     */
+    public function results()
+    {
+        return $this->hasMany(StudentResult::class, 'S_Subject_ID', 'S_Subject_ID');
+    }
 }

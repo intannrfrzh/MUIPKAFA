@@ -41,4 +41,5 @@ class StudentRegistration extends Authenticatable
     {
         return $this->hasMany(StudentResult::class, 'SR_Student_ID', 'User_ID');
     }
+    
 }

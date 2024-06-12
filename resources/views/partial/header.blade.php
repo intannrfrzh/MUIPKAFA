@@ -5,8 +5,6 @@
             <img src="{{ asset('image/logokafa.png') }}" alt="Logo" class="d-inline-block align-text-top">
         </div>
 
-        <!-- Notification Icon -->
-        <i class="fa fa-bell-o" aria-hidden="true"></i>
 
         <!-- Profile Session -->
         <div class="profile-container">
@@ -30,6 +28,15 @@
 </body>
 
 <style>
+    /* Global styles */
+    body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
     /* Header styles */
     .header {
         background-color: #89c0ef;
@@ -58,11 +65,25 @@
         text-align: center;
     }
 
-    /* Container for the icon and profile image */
-    .profile-container {
-        display: flex;
-        align-items: center;
-    }
+    /* Profile container styles */
+        .profile-container {
+            padding: 10px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-radius: 10px; /* Added rounded corners */
+            margin: 5px; /* Added margin to avoid container touching edges */
+        }
+
+        .profilebar {
+            display: flex;
+            align-items: center;
+        }
+
+        .profilebar i {
+            margin-right: 5px;
+        }
 
     /* Profile Info Styles */
     .profilebar span {

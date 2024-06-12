@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 //model used
 use App\Models\StudentResult;
 use App\Models\StudentRegistration;
+use App\Models\Teacher;
 
 
 class TeacherController extends Controller
 {
     public function dashboard($User_ID){
+
+        // Retrieve the teacher details
+      $teacher = Teacher::where('User_ID', $User_ID)->firstOrFail();
+
         // Pass the role and User_ID to the view
-        return view('tempt.teachertempt', compact('User_ID'));
+        return view('tempt.teachertempt', compact('User_ID', 'teacher'));
     }
 
     //show list of student
