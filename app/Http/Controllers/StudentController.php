@@ -22,4 +22,13 @@ class StudentController extends Controller
         // Pass the user ID to the view
         return view('tempt.template', ['User_ID' => $User_ID, 'student' => $student]);
     }
+
+    public function viewProfile($User_ID)
+    {
+        // Fetch the student details from the database
+        $student = StudentRegistration::findOrFail($User_ID);
+
+        // Pass the student data to the view
+        return view('manageprofile.viewProfileStudent', compact('student'));
+    }
 }
