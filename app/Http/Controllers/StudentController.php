@@ -25,10 +25,11 @@ class StudentController extends Controller
 
     public function viewProfile($User_ID)
     {
-        // Fetch the student details from the database
-        $student = StudentRegistration::findOrFail($User_ID);
+        // Fetch the student profile using the relationship
+        $student = User::where('User_ID', $User_ID)->firstOrFail();
+        $profile = StudentRegistration::where('User_ID', $User_ID)->firstOrFail();
 
         // Pass the student data to the view
-        return view('manageprofile.viewProfileStudent', compact('student'));
+        return view('manageprofile.viewProfileStudent', compact('profile', 'student', 'User_ID'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 //model used
 use App\Models\StudentResult;
@@ -49,8 +50,8 @@ public function showStudentResults($User_ID, $studentId)
             ->where('student_result.SR_Student_ID', $student->User_ID)
             ->select('student_result.S_Subject_ID', 'student_result.R_Result_grade', 'subject.S_Subject_name', 'student_registration.SR_Student_Name')
     ->get();
+
     
-    /*
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
 
     // Create the join query for specific student results
@@ -71,8 +72,8 @@ public function showStudentResults($User_ID, $studentId)
         ->get();
 
     // Debugging logs
-    \Log::info('Student:', [$student]);
-    \Log::info('Results:', $results->toArray());
+    Log::info('Student:', [$student]);
+    Log::info('Results:', $results->toArray());
 
     return view('manageStudentResult.teacher.teacher_viewresult', compact('User_ID', 'student', 'results'));
 }
