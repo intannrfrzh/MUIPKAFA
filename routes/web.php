@@ -44,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:K_admin'])->group(function () {
         Route::get('admin/home/{User_ID}', [KafaController::class, 'dashboard'])->name('admin.home');
         
+        //manage profile
+        Route::get('admin/home/viewStudentList/{User_ID}', [KafaController::class, 'studentList'])->name('admin.studentList');;
+
          // Activities admin routes
          Route::get('/admin/activities', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
          Route::get('/admin/activities/create', [adminActivitiesController::class, 'create'])->name('create');

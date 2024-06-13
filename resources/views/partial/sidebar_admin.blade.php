@@ -10,7 +10,7 @@
           Home</a>
       </li>
       <li>
-      <a href="#" class="nav-link">
+      <a href="{{ route('admin.studentList', ['User_ID' => $User_ID]) }}" class="nav-link">
         <i class="fa fa-user" aria-hidden="true"></i>
           Profile</a>
       </li>

@@ -17,7 +17,7 @@ class TeacherResultController extends Controller
     public function showResultsList($User_ID)
 {
 
-    //create a query to join student_registration and student_result table
+    
     //create a query to join student_registration and student_result table
     $list = DB::table('student_registration')
         ->leftJoin('student_result', function($join) {
@@ -50,8 +50,8 @@ public function showStudentResults($User_ID, $studentId)
             ->where('student_result.SR_Student_ID', $student->User_ID)
             ->select('student_result.S_Subject_ID', 'student_result.R_Result_grade', 'subject.S_Subject_name', 'student_registration.SR_Student_Name')
     ->get();
-
     
+    /*
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
 
     // Create the join query for specific student results
