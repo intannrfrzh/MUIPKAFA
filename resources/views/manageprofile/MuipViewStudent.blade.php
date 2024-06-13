@@ -1,11 +1,11 @@
-<!-- resources/views/manageprofile/StudentProfile.blade.php -->
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    @include('partial.head')
-    <style>
-        /* Global styles */
+@include('partial.head')
+<style>
+    /* Global styles */
     body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -42,6 +42,7 @@
             height: 100% auto;
             width: 100% auto;
         }
+
         .container {
             margin: 20px;
             max-width: 800px;
@@ -103,16 +104,27 @@
         .form-group button:hover {
             background-color: #0056b3;
         }
-    </style>
+    
+
+</style>
 </head>
+
 <body>
-    @include('partial.header')
+    {{-- Header --}}
+@include('partial.header', ['User_ID' => $User_ID])
 
+    
+    
+    {{-- Main layout --}}
     <div class="main-layout">
-        @include('partial.sidebar_admin', ['User_ID' => $User_ID])
-
+        {{-- Sidebar --}}
+        @include('partial.sidebar_muip', ['User_ID' => $User_ID])
+        
+        {{-- Content --}}
         <div class="content shadow p-3 mb-5 bg-body-tertiary rounded">
-            <center><h1><b>STUDENT PROFILE</b></h1></center>
+
+        <center><h1><b>STUDENT PROFILE</b></h1></center>
+        
             <div class="form-group">
                 <label for="User_ID">Student ID:</label>
                 <input type="text" id="User_ID" name="User_ID" value="{{ $student->User_ID }}" readonly>
@@ -133,7 +145,13 @@
                 <label for="phone_number">Phone Number:</label>
                 <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" value="{{ $student->SR_Student_phone_no }}" readonly>
             </div>
+
+            
+        
         </div>
+        
     </div>
+
 </body>
+
 </html>

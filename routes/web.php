@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //muip admin routes
-    Route::middleware(['role:J_admin'])->group(function () {
+        Route::middleware(['role:J_admin'])->group(function () {
         Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
 
         //manage profile muip routes
@@ -95,9 +95,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/muip/results/{User_ID}/{studentId}', [MuipResultController::class, 'showStudentResults'])->name('muip.viewresult');
    });
 
-    // Teacher Routes
-    Route::middleware(['role:teacher'])->group(function () {
+        // Teacher Routes
+        Route::middleware(['role:teacher'])->group(function () {
         Route::get('teacher/home/{User_ID}', [TeacherController::class, 'dashboard'])->name('teacher.home');
+
+        //manage profile muip routes
+        Route::get('teacher/home/viewStudentList/{User_ID}', [TeacherController::class, 'studentList'])->name('teacher.studentList');
+        Route::get('teacher/home/viewStudentProfile/{User_ID}/{studentId}', [TeacherController::class, 'viewStudentProfile'])->name('teacher.studentProfile');
 
         // Teacher Activities Route
         Route::get('/teacher/activities/view', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');

@@ -37,9 +37,10 @@ class KafaController extends Controller
         return redirect()->route('admin.studentList', ['User_ID' => $User_ID])->with('error', 'Student not found.');
     }
 
-    return view('manageprofile.ViewProfileStudent', compact('User_ID', 'student'));
+    return view('manageprofile.AdminViewStudent', compact('User_ID', 'student'));
     }
 
+    //edit student profile
     public function editStudentProfile($User_ID, $studentId)
 {
     $student = DB::table('student_registration')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 //model used
 use App\Models\StudentResult;
@@ -45,6 +46,28 @@ class TeacherController extends Controller
         Log::info('Results:', $results->toArray());
 
         return view('manageStudentResult.teacher.teacher_viewresult', compact('User_ID','student', 'results'));
-    }       
+    }  
+    
+    //show list of student
+    public function studentList($User_ID)
+    {
+        $students = DB::select('select * from student_registration');
+        return view('manageprofile.TeacherStudentList', compact('User_ID', 'students'));
+    }
+
+    //view specific profile
+    public function viewStudentProfileMuip($User_ID, $studentId)
+    {
+        $student = DB::table('student_registration')
+                 ->where('User_ID', $studentId)
+                 ->first();
+
+    if (!$student) {
+        // Handle case when student is not found
+        return redirect()->route('teacher.studentList', ['User_ID' => $User_ID])->with('error', 'Student not found.');
+    }
+
+    return view('manageprofile.TeacherViewStudent', compact('User_ID', 'student'));
+    }
 
 }

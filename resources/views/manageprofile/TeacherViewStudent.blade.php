@@ -109,7 +109,7 @@
     @include('partial.header')
 
     <div class="main-layout">
-        @include('partial.sidebar_admin', ['User_ID' => $User_ID])
+        @include('partial.sidebar_teacher', ['User_ID' => $User_ID])
 
         <div class="content shadow p-3 mb-5 bg-body-tertiary rounded">
             <center><h1><b>STUDENT PROFILE</b></h1></center>
