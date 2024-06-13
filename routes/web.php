@@ -17,7 +17,8 @@ use App\Http\Controllers\muipActivitiesController;
 use App\Http\Controllers\teacherActivitiesController;
 
 //result controller
-use App\Http\Controllers\AdminResultController;
+use App\Http\Controllers\adminResultController;
+use App\Http\Controllers\MuipResultController;
 use App\Http\Controllers\TeacherResultController;
 use App\Http\Controllers\StudentResultController;
 
@@ -25,6 +26,7 @@ use App\Http\Controllers\StudentResultController;
 
 //register routes
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
 Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
 
 // Login routes
@@ -54,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
 
 
          // Result admin routes
+        Route::get('/admin/results/{User_ID}', [AdminResultController::class, 'showResultsList'])->name('admin.resultslist');
+        Route::get('/admin/results/{User_ID}/{studentId}', [AdminResultController::class, 'showStudentResults'])->name('admin.viewresult');
+        Route::get('/admin/{User_ID}/student/{studentId}/results', [AdminResultController::class, 'editVerification'])->name('admin.updateInterface');
+        Route::put('/admin/update-verification/{User_ID}/{studentId}', [AdminResultController::class, 'updateVerification'])->name('admin.updateVerification');
 
     });
 
@@ -67,6 +73,10 @@ Route::middleware(['auth'])->group(function () {
        Route::put('/muip/activities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
        Route::delete('/muip/activities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
        Route::put('/muip/activities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
+
+       // Result muip routes
+       Route::get('/muip/results/{User_ID}', [MuipResultController::class, 'showResultsList'])->name('muip.resultslist');
+        Route::get('/muip/results/{User_ID}/{studentId}', [MuipResultController::class, 'showStudentResults'])->name('muip.viewresult');
    });
 
     // Teacher Routes
@@ -82,6 +92,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/teacher/results/{User_ID}/{studentId}', [TeacherResultController::class, 'showStudentResults'])->name('teacher.viewresult');
         Route::get('/teacher/add-result/{User_ID}/{studentId}', [TeacherResultController::class, 'addResultForm'])->name('teacher.addResult');
         Route::post('/teacher/{User_ID}/student/{studentId}/results', [TeacherResultController::class, 'saveResult'])->name('teacher.saveResult');
+        Route::get('/teacher/{User_ID}/student/{studentId}/results', [TeacherResultController::class, 'editResult'])->name('teacher.updateInterface');
+        Route::put('/teacher/edit-result/{User_ID}/{studentId}', [TeacherResultController::class, 'updateResults'])->name('teacher.updateResult');
+        Route::delete('/teacher/{User_ID}/student/{studentId}/result', [TeacherResultController::class, 'deleteResults'])->name('teacher.deleteResults');
 
     });
 

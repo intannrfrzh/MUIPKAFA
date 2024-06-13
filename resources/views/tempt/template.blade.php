@@ -25,50 +25,21 @@
         .content {
             flex: 1;
             background-color: #fff;
-            padding: 20px;
+            Center-align: center;
+            padding: 50px;
             overflow-y: auto;
+            max-height: 80vh;
+            max-width: 80vw;
         }
 
-        /* Search bar styles */
-    .search-bar {
-        background-color: #f1f1f1;
-        border-radius: 20px;
-        padding: 5px 10px;
-        display: flex;
-        align-items: center;
-        width: 250px;
-    }
-
-    .search-bar input[type="text"] {
-        border: none;
-        outline: none;
-        padding: 5px;
-        font-size: 16px;
-        width: 200px;
-    }
-
-    .search-bar button {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .addconbar{
-    position: fixed; /* Fixed positioning to keep it at the right side */
-    right: 0; /* Position it at the right side */
-    height: 100vh; /* Set the height to full viewport height */
-    width: 180px;
-    background-color: #fff; 
-    box-sizing: border-box;
-    border-left: 1px solid #89c0ef;
-    padding: 10px; /* Added padding for content */
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: flex-start; /* Align items to the start (top) of the container */
-}
-
+        /*picture*/
+        .image {
+            display: flex;
+            justify-content: center;
+            margin-top: 200px0px;
+            height: 100% auto;
+            width: 100% auto;
+        }
 </style>
 </head>
 
@@ -83,23 +54,16 @@
         {{-- Sidebar --}}
         @include('partial.sidebar_student', ['User_ID' => $User_ID])
         
-        <!-- additional content bar
-        <div class="addconbar">
-        <div class="add-container">
-            <h1>additional content</h1>
-        </div>
-        </div> -->
-        
-            {{-- Content --}}
-        <div class="content">
-            <!-- Search bar container -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <button><i class="fa fa-search"></i></button>
-        </div>
+        {{-- Content --}}
+        <div class="content shadow p-3 mb-5 bg-body-tertiary rounded">
 
-            <h1> student Main Content</h1>
-            <p>This is the main content area.</p>
+            <h1>Welcome, {{ $student->SR_Student_Name }}</h1>
+            <!-- image -->
+            <div class="image">
+                <img src="{{ asset('image/bgmainpage.png') }}" alt="Kafa-image" class="rounded ">
+            </div>
+
+
         </div>
     </div>
 

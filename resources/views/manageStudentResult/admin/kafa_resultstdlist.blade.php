@@ -45,7 +45,7 @@
 <body>
     @include('partial.header')
     <div class="main-layout">
-        @include('partial.sidebar_teacher', ['User_ID' => $User_ID])
+        @include('partial.sidebar_admin', ['User_ID' => $User_ID])
 
         <div class="content">
             <h1>Student Results</h1>
@@ -69,23 +69,21 @@
                         <td>
                         @if($student->R_Result_Verfication)      
                         <!--If the student has a result, display the View Results button-->
-                                <a href="{{ route('teacher.viewresult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                                <a href="{{ route('admin.viewresult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
                                     class="btn btn-primary">
                                     View Results
                                 </a>
                                 <!--If the verification status is Pending, display edit update button-->
                                 @if($student->R_Result_Verfication == 'PENDING')
-                                    <a href="{{ route('teacher.updateInterface', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                                    <a href="{{ route('admin.updateInterface', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
                                         class="btn btn-warning">
                                         Edit Result
                                     </a>
                                 @endif
-                            @else
-                                <a href="{{ route('teacher.addResult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
-                                    class="btn btn-primary">
-                                    Add Result
-                                </a>
-                            @endif
+                        @else
+                        <!--If the student has no result, display none-->
+                                <p>No action needed</p>
+                        @endif
                         </td>
                     </tr>
                     @endforeach

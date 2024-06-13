@@ -75,7 +75,8 @@
 
             <form action="{{ route('teacher.saveResult', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" method="POST">
             @csrf
-            <input type="hidden" name="teacher_id" value="{{ auth()->user()->id }}">
+            <!-- Hidden input field to store teacher ID -->
+            <input type="hidden" name="T_Teacher_ID" value="{{ $teacher->User_ID }}">
 
             <table>
                <thead>
