@@ -81,17 +81,11 @@
             </thead>
             <tbody>
             @foreach($results as $result)
-                <tr>
-                    <td>{{ $result->S_Subject_ID }}</td>
-                    <td>
-                        @if($result->subject)
-                            {{ $result->subject->S_Subject_name }}
-                        @else
-                            N/A
-                        @endif
-                    </td>
-                    <td>{{ $result->R_Result_grade }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $result->S_Subject_ID }}</td>
+                        <td>{{ $result->S_Subject_name ?? 'N/A' }}</td>
+                        <td>{{ $result->R_Result_grade }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

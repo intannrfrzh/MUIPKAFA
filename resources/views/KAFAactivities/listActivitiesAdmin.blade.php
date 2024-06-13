@@ -283,7 +283,7 @@
                                 </span>
                             </td>
                             <td>
-                            <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                            <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <a href="{{ route('editActivities', $activity->id) }}" class="btn btn-warning">EDIT</a>
                                 <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
@@ -325,7 +325,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -365,7 +365,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

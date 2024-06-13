@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            //$table->string('K_Admin_ID')->default('default_value');
-            //$table->string('J_Admin_ID')->default('default_value');
+            $table->string('K_Admin_ID');
+            $table->string('J_Admin_ID');
             $table->string('A_Activity_name');
             $table->string('A_Activity_details');
             $table->date('A_Activity_datestart');

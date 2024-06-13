@@ -274,7 +274,7 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <form action="{{ route('approve', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
@@ -320,7 +320,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
                                 <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf
@@ -368,7 +368,7 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                                 <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
                                 <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
                                     @csrf

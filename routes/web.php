@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Auth;
 
 //module controller
 use App\Http\Controllers\KafaController;
@@ -23,7 +25,7 @@ use App\Http\Controllers\StudentResultController;
 
 //register routes
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('register', [RegisteredUserController::class, 'store']);
+Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
 
 // Login routes
 require __DIR__.'/auth.php';
@@ -46,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
          Route::get('/admin/activities/{id}/edit', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
          Route::put('/admin/activities/{id}', [adminActivitiesController::class, 'update'])->name('update');
          Route::delete('/admin/activities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
-         Route::get('/admin/activities/{id}', [adminActivitiesController::class, 'show'])->name('show');
+         Route::get('/admin/activities/{id}', [adminActivitiesController::class, 'show'])->name('activities.show');
          Route::put('/admin/activities/approve/{id}', [adminActivitiesController::class, 'approve'])->name('approveActivity');
          Route::delete('/admin/activities/reject/{id}', [adminActivitiesController::class, 'reject'])->name('rejectActivity');
 
@@ -60,20 +62,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
 
        //activities muip routes
-       Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [muipActivitiesController::class, 'show'])->name('show');
-       Route::get('/resources/views/KAFAactivities/verifyActivities', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
-       Route::put('/resources/views/KAFAactivities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
-       Route::delete('/resources/views/KAFAactivities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
-       Route::put('/resources/views/KAFAactivities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
-    });
+       Route::get('/muip/activities/view/{id}', [muipActivitiesController::class, 'show'])->name('muip.show');
+       Route::get('/muip/activities/verify', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
+       Route::put('/muip/activities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
+       Route::delete('/muip/activities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
+       Route::put('/muip/activities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
+   });
 
     // Teacher Routes
     Route::middleware(['role:teacher'])->group(function () {
         Route::get('teacher/home/{User_ID}', [TeacherController::class, 'dashboard'])->name('teacher.home');
 
         // Teacher Activities Route
-        Route::get('/resources/views/KAFAactivities/viewListTeacher', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
-        Route::get('/resources/views/KAFAactivities/viewActivities/{id}', [teacherActivitiesController::class, 'show'])->name('show');
+        Route::get('/teacher/activities/view', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
+        Route::get('/teacher/activities/view/{id}', [teacherActivitiesController::class, 'show'])->name('teacher.show');
 
         // Teacher Result Route
         Route::get('/teacher/results/{User_ID}', [TeacherResultController::class, 'showResultsList'])->name('teacher.resultslist');
@@ -86,9 +88,12 @@ Route::middleware(['auth'])->group(function () {
     // Student Routes
         Route::middleware(['role:student'])->group(function () {
         Route::get('student/home/{User_ID}', function ($User_ID) {
-            \Log::info("Accessing student home for User_ID: " . $User_ID);
+            
             return app(StudentController::class)->dashboard($User_ID);
         })->name('student.home');
+
+        // Student Profile Route
+        Route::get('/profile/{User_ID}', [StudentController::class, 'viewProfile'])->name('viewProfile');
 
         // Student Result Route
         Route::get('/result/{User_ID}', [StudentResultController::class, 'viewResult'])->name('student.result');

@@ -199,7 +199,7 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
-                                <a href="{{ route('show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('teacher.show', $activity->id) }}" class="btn btn-info">VIEW</a>
                             </td>
                         </tr>
                         @endforeach

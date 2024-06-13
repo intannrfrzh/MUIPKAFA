@@ -15,10 +15,8 @@ class TeacherResultController extends Controller
     //show list of student
     public function showResultsList($User_ID)
 {
-    //$students = StudentRegistration::all();
-    //$subjectCode = 'UPKK01';
-    //$results = [];
 
+    //create a query to join student_registration and student_result table
     $list = DB::table('student_registration')
         ->leftJoin('student_result', function($join) {
             $join->on('student_registration.User_ID', '=', 'student_result.SR_Student_ID')
@@ -40,10 +38,24 @@ class TeacherResultController extends Controller
 // Show specific student results
 public function showStudentResults($User_ID, $studentId)
 {
+    // Retrieve the student details
+    $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
+
+    
+    //join table student_result and subject
+    $results = DB::table('student_result')
+            ->leftJoin('subject', 'student_result.S_Subject_ID', '=', 'subject.S_Subject_ID')
+            ->leftJoin('student_registration', 'student_result.SR_Student_ID', '=', 'student_registration.User_ID')
+            ->where('student_result.SR_Student_ID', $student->User_ID)
+            ->select('student_result.S_Subject_ID', 'student_result.R_Result_grade', 'subject.S_Subject_name', 'student_registration.SR_Student_Name')
+    ->get();
+    
+    /*
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
     $results = StudentResult::where('SR_Student_ID', $student->User_ID)
                             ->with('subject') // Eager load the subject relation
                             ->get();
+    */
 
     // Debugging logs
     \Log::info('Student:', [$student]);
@@ -70,13 +82,16 @@ public function addResultForm($User_ID, $studentId)
         ->select('subject.S_Subject_ID', 'subject.S_Subject_name', 'student_result.R_Result_grade')
         ->get();
 
-    return view('manageStudentResult.teacher.teacher_addresult', compact('User_ID', 'student', 'subjects'));
+     // Retrieve the teacher details based on User_ID
+     $teacher = DB::table('teachers')->where('User_ID', $User_ID)->first();
+
+     return view('manageStudentResult.teacher.teacher_addresult', compact('User_ID', 'student', 'subjects', 'teacher'));
 }
 
 // Save the result
 public function saveResult(Request $request, $User_ID, $studentId)
 {
-    $teacherId = auth()->user()->User_ID; // Get the authenticated teacher ID
+    $teacherId = DB::table('teachers')->where('User_ID', $User_ID)->value('T_Teacher_ID'); // Get the teacher ID from the teacher table
     $subjects = $request->input('subjects');
     
     foreach ($subjects as $subject) {
