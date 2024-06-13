@@ -42,13 +42,20 @@
     {{-- Main layout --}}
     <div class="main-layout">
         {{-- Sidebar --}}
-        @include('partial.sidebar_admin')
+        @include('partial.sidebar_admin', ['User_ID' => $User_ID] )
         
             {{-- Content --}}
         <div class="content">
 
         {{-- Controller yg ni pakai KafaController --}}
         <h1>Student List</h1>
+
+        <a class="btn btn-primary"
+        href="{{ route('admin.registerFormUser', ['User_ID' => $User_ID]) }}" 
+                                    class="btn btn-primary">
+                                    Add Student
+                        </a>
+
     <table class="table table-success table-striped table-bordered">
         <thead class="table-light">
             <tr>
@@ -68,9 +75,18 @@
                     <td>{{ $student->SR_Student_IC }}</td>
                     <td>{{ $student->SR_Student_gender }}</td>
                     <td>{{ $student->SR_Student_phone_no }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ route('admin.studentProfile', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                                    class="btn btn-primary">
+                                    View Profile
+                        </a>
+                        <a href="{{ route('admin.editStudentProfile', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" class="btn btn-primary">
+                            Edit Profile</a>
+                                    
+                    </td>
                 </tr>
             @endforeach
+            
         </tbody>
     </table>
 

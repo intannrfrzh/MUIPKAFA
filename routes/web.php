@@ -25,9 +25,9 @@ use App\Http\Controllers\StudentResultController;
 
 
 //register routes
-Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
-Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
+//Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+//Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
+//Route::post('register', [RegisteredUserController::class, 'store'])->middleware('setUserIdInSession');
 
 // Login routes
 require __DIR__.'/auth.php';
@@ -40,11 +40,19 @@ Route::get('/', function () {
 // Role-based routes
 Route::middleware(['auth'])->group(function () {
     // kafa Admin Routes
-    Route::middleware(['role:K_admin'])->group(function () {
+        Route::middleware(['role:K_admin'])->group(function () {
         Route::get('admin/home/{User_ID}', [KafaController::class, 'dashboard'])->name('admin.home');
         
         //manage profile
-        Route::get('admin/home/viewStudentList/{User_ID}', [KafaController::class, 'studentList'])->name('admin.studentList');;
+        Route::get('admin/home/viewStudentList/{User_ID}', [KafaController::class, 'studentList'])->name('admin.studentList');
+        Route::get('admin/home/viewStudentProfile/{User_ID}/{studentId}', [KafaController::class, 'viewStudentProfile'])->name('admin.studentProfile');
+        Route::get('/admin/student-profile/edit/{User_ID}/{studentId}', [KafaController::class, 'editStudentProfile'])->name('admin.editStudentProfile');
+        Route::post('/admin/student-profile/update/{User_ID}/{studentId}', [KafaController::class, 'updateStudentProfile'])->name('admin.updateStudentProfile');
+        //student registration
+        Route::get('/admin/registerStudent/{User_ID}', [KafaController::class, 'registerUserForm'])->name('admin.registerFormUser');
+        Route::post('/admin/storeUser/{User_ID}', [KafaController::class, 'storeUser'])->name('admin.storeUser');
+        Route::get('/admin/registerStudent/{User_ID}/{studentId}', [KafaController::class, 'registerStudentForm'])->name('admin.registerFormStudent');
+        Route::post('/admin/storeStudentDetails', [KafaController::class, 'storeStudentDetails'])->name('admin.storeStudentDetails');
 
          // Activities admin routes
          Route::get('/admin/activities', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
@@ -69,6 +77,10 @@ Route::middleware(['auth'])->group(function () {
     //muip admin routes
     Route::middleware(['role:J_admin'])->group(function () {
         Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
+
+        //manage profile muip routes
+        Route::get('muip/home/viewStudentList/{User_ID}', [MuipController::class, 'studentList'])->name('muip.studentList');
+        Route::get('muip/home/viewStudentProfile/{User_ID}/{studentId}', [MuipController::class, 'viewStudentProfile'])->name('muip.studentProfile');
 
        //activities muip routes
        Route::get('/muip/activities/view/{id}', [muipActivitiesController::class, 'show'])->name('muip.show');

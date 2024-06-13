@@ -15,6 +15,9 @@ class StudentRegistration extends Authenticatable
     // Specify the table
     protected $table = 'student_registration';
 
+    // Disable timestamps
+    public $timestamps = false;
+
     // Specify the primary key
     protected $primaryKey = 'User_ID';
 
@@ -23,11 +26,10 @@ class StudentRegistration extends Authenticatable
         'User_ID',
         'K_Admin_ID',
         'S_Subject_ID',
-        'I_Parent_ID',
         'SR_Student_Name',
-        'Sr_Student_IC',
+        'SR_Student_IC',
         'SR_Student_gender',
-        'Sr_Student_phone_no'
+        'SR_Student_phone_no'
     ];
 
     

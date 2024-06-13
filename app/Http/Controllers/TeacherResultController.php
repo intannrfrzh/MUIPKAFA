@@ -16,8 +16,6 @@ class TeacherResultController extends Controller
     //show list of student
     public function showResultsList($User_ID)
 {
-
-    
     //create a query to join student_registration and student_result table
     $list = DB::table('student_registration')
         ->leftJoin('student_result', function($join) {
