@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 //model used
 use App\Models\StudentResult;
@@ -40,8 +41,8 @@ class TeacherController extends Controller
         $results = StudentResult::where('SR_Student_ID', $student->User_ID)->get();
     
         // Debugging logs
-        \Log::info('Student:', [$student]);
-        \Log::info('Results:', $results->toArray());
+        Log::info('Student:', [$student]);
+        Log::info('Results:', $results->toArray());
 
         return view('manageStudentResult.teacher.teacher_viewresult', compact('User_ID','student', 'results'));
     }       

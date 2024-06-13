@@ -15,6 +15,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\adminActivitiesController;
 use App\Http\Controllers\muipActivitiesController;
 use App\Http\Controllers\teacherActivitiesController;
+use App\Http\Controllers\studentActivitiesController;
 
 //result controller
 use App\Http\Controllers\adminResultController;
@@ -122,6 +123,10 @@ Route::middleware(['auth'])->group(function () {
 
         // Student Profile Route
         Route::get('/profile/{User_ID}', [StudentController::class, 'viewProfile'])->name('viewProfile');
+
+        // Student Activities Route
+        Route::get('/student/activities/view', [studentActivitiesController::class, 'viewListStudent'])->name('viewListStudent');
+        Route::get('/student/activities/{id}', [studentActivitiesController::class, 'show'])->name('student.show');
 
         // Student Result Route
         Route::get('/result/{User_ID}', [StudentResultController::class, 'viewResult'])->name('student.result');

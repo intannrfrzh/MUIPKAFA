@@ -49,7 +49,7 @@ public function showStudentResults($User_ID, $studentId)
             ->select('student_result.S_Subject_ID', 'student_result.R_Result_grade', 'subject.S_Subject_name', 'student_registration.SR_Student_Name')
     ->get();
     
-    
+    /*
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
 
     // Create the join query for specific student results
@@ -70,8 +70,8 @@ public function showStudentResults($User_ID, $studentId)
         ->get();
 
     // Debugging logs
-    \Log::info('Student:', [$student]);
-    \Log::info('Results:', $results->toArray());
+    Log::info('Student:', [$student]);
+    Log::info('Results:', $results->toArray());
 
     return view('manageStudentResult.teacher.teacher_viewresult', compact('User_ID', 'student', 'results'));
 }

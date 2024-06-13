@@ -205,19 +205,19 @@
                 </div>
                 <div class="form-group">
                     <label for="SR_Student_Name">Name:</label>
-                    <input type="text" id="SR_Student_Name" name="SR_Student_Name" value="{{ $student->SR_Student_Name }}" readonly>
+                    <input type="text" id="SR_Student_Name" name="SR_Student_Name" value="{{ $profile->SR_Student_Name }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="SR_Student_IC">IC Number:</label>
-                    <input type="text" id="SR_Student_IC" name="SR_Student_IC" value="{{ $student->SR_Student_IC }}" readonly>
+                    <input type="text" id="SR_Student_IC" name="SR_Student_IC" value="{{ $profile->SR_Student_IC }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="SR_Student_gender">Gender:</label>
-                    <input type="text" id="SR_Student_gender" name="SR_Student_gender" value="{{ $student->SR_Student_gender }}" readonly>
+                    <input type="text" id="SR_Student_gender" name="SR_Student_gender" value="{{ $profile->SR_Student_gender }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="phone_number">Phone Number:</label>
-                    <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" value="{{ $student->SR_Student_phone_no }}" readonly>
+                    <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" value="{{ $profile->SR_Student_phone_no }}" readonly>
                 </div>
             </div>
         </div>
