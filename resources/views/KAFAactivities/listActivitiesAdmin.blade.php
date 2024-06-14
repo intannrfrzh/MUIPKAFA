@@ -254,7 +254,7 @@
             <div class="container">
                 <center><h1><b>MANAGE ACTIVITIES</b></h1></center>
                 <h2>Pending Approval</h2>
-                <a href="{{ route('create') }}" class="btn btn-primary">ADD ACTIVITY </a>
+                <a href="{{ route('create', ['User_ID' => $User_ID]) }}" class="btn btn-primary">ADD ACTIVITY </a>
                 <table class="table mt-4">
                     <thead>
                         <tr>
@@ -283,9 +283,9 @@
                                 </span>
                             </td>
                             <td>
-                            <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                            <a href="{{ route('activities.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
                                 <a href="{{ route('editActivities', $activity->id) }}" class="btn btn-warning">EDIT</a>
-                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
@@ -325,8 +325,8 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('activities.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
@@ -365,8 +365,8 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('activities.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
+                                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\activities;
 use App\Models\KafaAdmin;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Session;
@@ -12,32 +13,37 @@ use Illuminate\Support\Facades\Session;
 class AdminActivitiesController extends Controller
 {
     // To view all activities
-    public function listActivitiesAdmin()
+    public function listActivitiesAdmin(Request $request)
     {
-        $User_ID = Session::get('User_ID');
+        $User_ID = $request->User_ID;
+        Session::put('User_ID', $User_ID);
 
         $pendingActivities = activities::where('A_Activity_status', 'pending')->get();
         $approvedActivities = activities::where('A_Activity_status', 'approved')->get();
         $rejectedActivities = activities::where('A_Activity_status', 'rejected')->get();
         
         //$activities = activities::all();
-        return view('KAFAactivities.listActivitiesAdmin', compact('pendingActivities', 'approvedActivities', 'rejectedActivities', 'User_ID'));
+        return view('KAFAactivities.listActivitiesAdmin', compact('pendingActivities', 'approvedActivities', 'rejectedActivities', 'User_ID' ));
     }
 
     // To show the form for creating a new activity
     public function create()
     {
-        return view('KAFAactivities.addActivities');
+        $User_ID = Session::get('User_ID');
+        return view('KAFAactivities.addActivities', compact('User_ID'));
         
     }
 
     // To store a newly created activity in the database
     public function store(Request $request)
 { 
+    $User_ID = $request->input('User_ID');
     // Set default values for K_Admin_ID and J_Admin_ID
     $kAdminId = 'AD21075'; // Set the appropriate default value
     $jAdminId = 'JP21017'; // Set the appropriate default value
     
+    $User_ID = $request->input('User_ID');
+
     Log::info('Request data: ', $request->all());
 
     $activities = new activities();
@@ -52,7 +58,7 @@ class AdminActivitiesController extends Controller
     $activities->A_Activity_timeend = $request->A_Activity_timeend;
     $activities ->save();
     
-        return redirect()->route('listActivitiesAdmin')->with('success', 'Activity added successfully.');
+        return redirect()->route('listActivitiesAdmin', ['User_ID' => $User_ID])->with('success', 'Activity added successfully.');
 }
 
 
@@ -60,13 +66,15 @@ class AdminActivitiesController extends Controller
     // To show the form for editing an existing activity
     public function editActivities($id)
     {
+        $User_ID = Session::get('User_ID');
         $activity = activities::findOrFail($id);
-        return view('KAFAactivities.editActivities', compact('activity'));
+        return view('KAFAactivities.editActivities', compact('activity', 'User_ID'));
     }
 
     // To update the specified activity in the database
     public function update(Request $request, $id)
     {
+        $User_ID = $request->input('User_ID');
 
         $request->validate([
             
@@ -90,7 +98,7 @@ class AdminActivitiesController extends Controller
             'A_Activity_timeend' => $request->A_Activity_timeend,
         ]);
 
-        return redirect()->route('listActivitiesAdmin')->with('success', 'Activity updated successfully');
+        return redirect()->route('listActivitiesAdmin', ['User_ID' => $User_ID])->with('success', 'Activity updated successfully');
     }
 
     // To delete the specified activity from the database
@@ -104,9 +112,10 @@ class AdminActivitiesController extends Controller
     // To show the form for viewing an existing activity
     public function show($id)
     {
+        $User_ID = Session::get('User_ID');
 
         $activity = activities::findOrFail($id);
-        return view('KAFAactivities.viewActivities', compact('activity'));
+        return view('KAFAactivities.viewActivities', compact('activity', 'User_ID'));
     }
 
     // Approve an activity

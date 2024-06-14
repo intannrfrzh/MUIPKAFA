@@ -15,7 +15,7 @@
           Profile</a>
       </li>
       <li>
-      <a href="{{ route('verifyActivities') }}" class="nav-link">
+      <a href="{{ route('verifyActivities', ['User_ID' => $User_ID]) }}) }}" class="nav-link">
         <i class="fa fa-tasks" aria-hidden="true"></i>
           Activities</a>
       </li>

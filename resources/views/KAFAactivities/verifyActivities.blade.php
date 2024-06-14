@@ -274,13 +274,13 @@
                             <td>{{ $activity->A_Activity_timestart }}</td>
                             <td>{{ $activity->A_Activity_timeend }}</td>
                             <td>
-                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
-                                <form action="{{ route('approve', $activity->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('muip.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
+                                <form action="{{ route('approve', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-success">APPROVE</button>
                                 </form>
-                                <form action="{{ route('reject', $activity->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('reject', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">REJECT</button>
@@ -320,9 +320,9 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('muip.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
                                 <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
-                                <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('change', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-warning">CHANGE</button>
@@ -331,7 +331,7 @@
                         </tr>
                         @endforeach
                 @foreach($approvedActivities as $activity)
-                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display: none;">
+                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display: none;">
                     @csrf
                     @method('DELETE')
                 </form>
@@ -368,9 +368,9 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('muip.show', $activity->id) }}" class="btn btn-info">VIEW</a>
+                                <a href="{{ route('muip.show', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" class="btn btn-info">VIEW</a>
                                 <button class="deleteActivities" data-id="{{ $activity->id }}" onclick="showDeletePopup(this)">DELETE</button>
-                                <form action="{{ route('change', $activity->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('change', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-warning">CHANGE</button>
@@ -379,7 +379,7 @@
                         </tr>
                         @endforeach
                 @foreach($rejectedActivities as $activity)
-                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', $activity->id) }}" method="POST" style="display: none;">
+                <form id="deleteForm{{ $activity->id }}" action="{{ route('destroy', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST" style="display: none;">
                     @csrf
                     @method('DELETE')
                 </form>

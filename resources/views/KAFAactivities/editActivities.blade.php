@@ -214,7 +214,7 @@
         <div class="content">
             <div class="container">
             <center><h1><b>UPDATE ACTIVITY</b></h1></center>
-                <form id="updateForm" action="{{ route('update', $activity->id) }}" method="POST">
+                <form id="updateForm" action="{{ route('update', ['id' => $activity->id, 'User_ID' => $User_ID]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

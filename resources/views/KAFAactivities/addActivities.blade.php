@@ -175,7 +175,7 @@ echo
         <div class="content">
             <div class="container">
             <center><h1><b> ADD ACTIVITY</b></h1></center>
-                <form action="{{ route('store') }}" method="POST">
+                <form action="{{ route('store', ['User_ID' => $User_ID]) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="A_Activity_name">TITLE:</label>

@@ -48,13 +48,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/home/viewStudentList/{User_ID}', [KafaController::class, 'studentList'])->name('admin.studentList');;
 
          // Activities admin routes
-         Route::get('/admin/activities', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
-         Route::get('/admin/activities/create', [adminActivitiesController::class, 'create'])->name('create');
+         Route::get('/admin/activities/{User_ID}', [adminActivitiesController::class, 'listActivitiesAdmin'])->name('listActivitiesAdmin');
+         Route::get('/admin/activities/{User_ID}/create', [adminActivitiesController::class, 'create'])->name('create');
          Route::post('/admin/activities/store', [adminActivitiesController::class, 'store'])->name('store');
          Route::get('/admin/activities/{id}/edit', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
-         Route::put('/admin/activities/{id}', [adminActivitiesController::class, 'update'])->name('update');
+         Route::put('/admin/activities/{User_ID}/{id}', [adminActivitiesController::class, 'update'])->name('update');
          Route::delete('/admin/activities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
-         Route::get('/admin/activities/{id}', [adminActivitiesController::class, 'show'])->name('activities.show');
+         Route::get('/admin/activities/{id}/{User_ID}', [adminActivitiesController::class, 'show'])->name('activities.show');
          Route::put('/admin/activities/approve/{id}', [adminActivitiesController::class, 'approve'])->name('approveActivity');
          Route::delete('/admin/activities/reject/{id}', [adminActivitiesController::class, 'reject'])->name('rejectActivity');
 
@@ -72,8 +72,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('muip/home/{User_ID}', [MuipController::class, 'dashboard'])->name('muip.home');
 
        //activities muip routes
-       Route::get('/muip/activities/view/{id}', [muipActivitiesController::class, 'show'])->name('muip.show');
-       Route::get('/muip/activities/verify', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
+       Route::get('/muip/activities/{User_ID}', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');
+       Route::get('/muip/activities/{id}/{User_ID}', [muipActivitiesController::class, 'show'])->name('muip.show');
        Route::put('/muip/activities/approve/{id}', [muipActivitiesController::class, 'approve'])->name('approve');
        Route::delete('/muip/activities/reject/{id}', [muipActivitiesController::class, 'reject'])->name('reject');
        Route::put('/muip/activities/change/{id}', [muipActivitiesController::class, 'change'])->name('change');
@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('teacher/home/{User_ID}', [TeacherController::class, 'dashboard'])->name('teacher.home');
 
         // Teacher Activities Route
-        Route::get('/teacher/activities/view', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
+        Route::get('/teacher/activities/{User_ID}', [teacherActivitiesController::class, 'viewListTeacher'])->name('viewListTeacher');
         Route::get('/teacher/activities/view/{id}', [teacherActivitiesController::class, 'show'])->name('teacher.show');
 
         // Teacher Result Route
@@ -113,7 +113,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/{User_ID}', [StudentController::class, 'viewProfile'])->name('viewProfile');
 
         // Student Activities Route
-        Route::get('/student/activities/view', [studentActivitiesController::class, 'viewListStudent'])->name('viewListStudent');
+        Route::get('/student/activities{User_ID}', [studentActivitiesController::class, 'viewListStudent'])->name('viewListStudent');
         Route::get('/student/activities/{id}', [studentActivitiesController::class, 'show'])->name('student.show');
 
         // Student Result Route
