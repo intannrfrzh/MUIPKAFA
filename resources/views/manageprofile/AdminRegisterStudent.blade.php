@@ -1,85 +1,94 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- User ID -->
-        <div class="mt-4">
-            <x-input-label for="User_ID" :value="__('User_ID')" />
-            <x-text-input id="User_ID" class="block mt-1 w-full" type="text" name="User_ID" :value="old('User_ID')" required autocomplete="User_ID" />
-            <x-input-error :messages="$errors->get('User_ID')" class="mt-2" />
-        </div>
+<head>
+    @include('partial.head')
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        /* Main layout styles */
+        .main-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+        /* Content styles */
+        .content {
+            flex: 1;
+            background-color: #fff;
+            center-align: center;
+            padding: 50px;
+            overflow-y: auto;
+            max-height: 80vh;
+            max-width: 80vw;
+        }
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        /* Picture */
+        .image {
+            display: flex;
+            justify-content: center;
+            margin-top: 200px0px;
+            height: 100% auto;
+            width: 100% auto;
+        }
+    </style>
+</head>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+<body>
+    {{-- Header --}}
+    @include('partial.header')
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+    {{-- Main layout --}}
+    <div class="main-layout">
+        {{-- Sidebar --}}
+        @include('partial.sidebar_admin', ['User_ID' => $User_ID])
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+        {{-- Content --}}
+        <div class="content shadow p-3 mb-5 bg-body-tertiary rounded">
+        <form method="POST" action="{{ route('admin.storeStudentDetails', ['User_ID' => $User_ID, 'studentId']) }}">
+    @csrf
+    <h1>Register Student </h1>
 
-        <div>
-        <label for="role">Role</label>
-        <select id="role" name="role" required>
-            <option value=" ">Select you role</option>
-            <option value="K_admin">KAFA Admin</option>
-            <option value="J_admin">JAIP Admin</option>
-            <option value="teacher">Teacher</option>
-            <option value="student">Student</option>
+    <input type="hidden" name="K_Admin_ID" value="{{ $User_ID }}">
+    <div class="form-group">
+        <label for="SR_Student_IC">Student ID</label>
+        <input type="text" id="User_ID" name="User_ID" value="{{ $studentId }}" class="form-control" required readonly>
+    </div>
+    <div class="form-group">
+        <label for="SR_Student_Name">Student Name</label>
+        <input type="text" id="SR_Student_Name" name="SR_Student_Name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="SR_Student_IC">Student IC</label>
+        <input type="text" id="SR_Student_IC" name="SR_Student_IC" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="SR_Student_gender">Gender</label>
+        <select id="SR_Student_gender" name="SR_Student_gender" class="form-control" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
         </select>
     </div>
+    <div class="form-group">
+        <label for="SR_Student_phone_no">Phone Number</label>
+        <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Register Student</button>
+</form>
 
-        <div class="flex items-center justify-end mt-4">
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
         </div>
-    </form>
+    </div>
 
-    <!--for debug purpose-->
-    <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            const formData = new FormData(this);
-            
-            console.log('Form Data:', Object.fromEntries(formData.entries()));
+    
 
-            fetch('{{ route('register') }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                window.location.href = data.redirect_url; // Redirect to the URL specified in the response
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was a problem with your registration. Please try again.');
-            });
-        });
-    </script>
+</body>
 
-</x-guest-layout>
+</html>
