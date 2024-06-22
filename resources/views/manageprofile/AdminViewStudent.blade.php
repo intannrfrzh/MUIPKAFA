@@ -103,6 +103,23 @@
         .form-group button:hover {
             background-color: #0056b3;
         }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
@@ -133,6 +150,8 @@
                 <label for="phone_number">Phone Number:</label>
                 <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" value="{{ $student->SR_Student_phone_no }}" readonly>
             </div>
+
+            <a href="{{ route('admin.studentList', ['User_ID' => $User_ID]) }}" class="back-button">Back to Results List</a>
         </div>
     </div>
 </body>

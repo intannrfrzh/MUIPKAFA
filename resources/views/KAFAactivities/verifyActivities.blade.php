@@ -244,7 +244,7 @@
     {{-- Main layout --}}
     <div class="main-layout">
         {{-- Sidebar --}}
-        @include('partial.sidebar')
+        @include('partial.sidebar_muip', ['User_ID' => $User_ID])
 
         {{-- Content --}}
         <div class="content">

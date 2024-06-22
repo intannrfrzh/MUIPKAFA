@@ -107,6 +107,8 @@ public function updateStudentProfile(Request $request, $User_ID, $studentId)
                      ->with('success', 'User registered successfully. Proceed to add student details.');
 }
 
+
+//student registration form
 //show student registration form
 public function registerStudentForm($User_ID, $studentId)
 {
@@ -141,7 +143,7 @@ public function storeStudentDetails(Request $request)
         'K_Admin_ID' => $request->K_Admin_ID,
     ]);
 
-    return redirect()->route('admin.home', ['User_ID' => $request->K_Admin_ID])
+    return redirect()->route('admin.studentList', ['User_ID' => $request->K_Admin_ID])
                      ->with('success', 'Student details registered successfully.');
 }
 

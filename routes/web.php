@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
 
         //manage profile muip routes
         Route::get('muip/home/viewStudentList/{User_ID}', [MuipController::class, 'studentList'])->name('muip.studentList');
-        Route::get('muip/home/viewStudentProfile/{User_ID}/{studentId}', [MuipController::class, 'viewStudentProfile'])->name('muip.studentProfile');
+        Route::get('muip/home/viewStudentProfile/{User_ID}/{studentId}', [MuipController::class, 'viewStudentProfileMuip'])->name('muip.studentProfile');
 
        //activities muip routes
        Route::get('/muip/activities/{User_ID}', [muipActivitiesController::class, 'verifyActivities'])->name('verifyActivities');

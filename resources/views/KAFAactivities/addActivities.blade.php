@@ -166,7 +166,7 @@ echo
     {{-- Main layout --}}
     <div class="main-layout">
         {{-- Sidebar --}}
-        @include('partial.sidebar')
+        @include('partial.sidebar_admin', ['User_ID' => $User_ID])
 
         {{-- Profile bar --}}
         {{-- @include('partial.profilebar') --}}

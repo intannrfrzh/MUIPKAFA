@@ -103,6 +103,23 @@
         .form-group button:hover {
             background-color: #0056b3;
         }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #333;
+        }
     </style>
 </head>
 <body>

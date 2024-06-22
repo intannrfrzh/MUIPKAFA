@@ -118,7 +118,7 @@
                 
                 {{-- Reject button --}}
                 <button type="submit" name="action" value="reject" class="submit-button" style="background-color: #f44336;">Reject Results</button>
-
+                
                 <a href="{{ route('admin.resultslist', ['User_ID' => $User_ID]) }}" class="back-button">Back to Results List</a>
             </form>
         </div>
