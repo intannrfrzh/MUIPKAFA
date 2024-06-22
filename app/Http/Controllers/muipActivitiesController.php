@@ -26,6 +26,7 @@ class muipActivitiesController extends Controller
         return view('KAFAactivities.verifyActivities', compact('pendingActivities', 'approvedActivities', 'rejectedActivities', 'User_ID' ));
     }
 
+    //approve activity
     public function approve(Request $request, $id)
     {
         // Retrieve User_ID from session
@@ -66,6 +67,7 @@ class muipActivitiesController extends Controller
         return redirect()->route('verifyActivities', ['User_ID' => $User_ID])->with('success', 'Activity rejected successfully.');
     }
 
+    //view activity form
     public function show($id)
     {
         $User_ID = Session::get('User_ID');

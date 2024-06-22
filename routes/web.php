@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
          Route::get('/admin/activities/{User_ID}/create', [adminActivitiesController::class, 'create'])->name('create');
          Route::post('/admin/activities/store', [adminActivitiesController::class, 'store'])->name('store');
          Route::get('/admin/activities/{id}/edit', [adminActivitiesController::class, 'editActivities'])->name('editActivities');
-         Route::put('/admin/activities/{User_ID}/{id}', [adminActivitiesController::class, 'update'])->name('update');
+         Route::put('/admin/activities/{id}', [adminActivitiesController::class, 'update'])->name('update');
          Route::delete('/admin/activities/{id}', [adminActivitiesController::class, 'destroy'])->name('destroy');
          Route::get('/admin/activities/{id}/{User_ID}', [adminActivitiesController::class, 'show'])->name('activities.show');
          Route::put('/admin/activities/approve/{id}', [adminActivitiesController::class, 'approve'])->name('approveActivity');
