@@ -84,10 +84,54 @@
                     <input type="text" id="SR_Student_phone_no" name="SR_Student_phone_no" value="{{ $student->SR_Student_phone_no }}" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update Profile</button>
-            </form>
-        
-    </div>
-
-</body>
-
-</html>
+             <!--Delete button-->
+             <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Student</button>
+                
+                </form>
+            </div>
+            
+        </div>
+    
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDeleteModal()">&times;</span>
+                <p>Are you sure you want to delete this student?</p>
+                <form id="deleteForm" method="POST" action="{{ route('admin.deleteStudentProfile', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Yes, Delete Student</button>
+                </form>
+            </div>
+        </div>
+    
+    
+        <script>
+            // Get the modal elements
+            var modal = document.getElementById("myModal");
+            var deleteModal = document.getElementById("deleteModal");
+    
+            // Function to open the delete confirmation modal
+            function confirmDelete() {
+                deleteModal.style.display = "block";
+            }
+    
+            // Function to close the delete modal
+            function closeDeleteModal() {
+                deleteModal.style.display = "none";
+            }
+    
+            // Close the modals if the user clicks outside of them
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+                if (event.target == deleteModal) {
+                    deleteModal.style.display = "none";
+                }
+            }
+        </script>
+    
+    </body>
+    
+    </html>

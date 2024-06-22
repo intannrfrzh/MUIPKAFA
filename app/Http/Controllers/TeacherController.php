@@ -56,7 +56,7 @@ class TeacherController extends Controller
     }
 
     //view specific profile
-    public function viewStudentProfileMuip($User_ID, $studentId)
+    public function viewStudentProfile($User_ID, $studentId)
     {
         $student = DB::table('student_registration')
                  ->where('User_ID', $studentId)

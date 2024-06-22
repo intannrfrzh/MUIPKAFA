@@ -147,4 +147,18 @@ public function storeStudentDetails(Request $request)
                      ->with('success', 'Student details registered successfully.');
 }
 
+public function deleteStudentProfile($User_ID, $studentId)
+{
+    DB::table('student_registration')
+        ->where('User_ID', $studentId)
+        ->delete();
+    
+    DB::table('users')
+        ->where('User_ID', $studentId)
+        ->delete();
+
+    return redirect()->route('admin.studentList', ['User_ID' => $User_ID])
+                     ->with('success', 'Student deleted successfully.');        
+}
+
 }

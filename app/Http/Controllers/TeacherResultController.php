@@ -40,7 +40,6 @@ public function showStudentResults($User_ID, $studentId)
     // Retrieve the student details
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
 
-<<<<<<< Updated upstream
     
     //join table student_result and subject
     $results = DB::table('student_result')
@@ -53,8 +52,6 @@ public function showStudentResults($User_ID, $studentId)
     
     $student = StudentRegistration::where('User_ID', $studentId)->firstOrFail();
 
-=======
->>>>>>> Stashed changes
     // Create the join query for specific student results
     $results = DB::table('student_registration')
         ->leftJoin('student_result', function($join) use ($studentId) {

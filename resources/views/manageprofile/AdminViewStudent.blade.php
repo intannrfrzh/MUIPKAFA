@@ -1,7 +1,7 @@
 <!-- resources/views/manageprofile/StudentProfile.blade.php -->
 
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
     @include('partial.head')
     <style>

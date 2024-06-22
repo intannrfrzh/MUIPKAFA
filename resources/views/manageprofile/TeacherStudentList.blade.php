@@ -71,7 +71,7 @@
                     <td>{{ $student->SR_Student_gender }}</td>
                     <td>{{ $student->SR_Student_phone_no }}</td>
                     <td>
-                        <a href="{{ route('admin.studentProfile', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
+                        <a href="{{ route('teacher.studentProfile', ['User_ID' => $User_ID, 'studentId' => $student->User_ID]) }}" 
                                     class="btn btn-primary">
                                     View Profile
                         </a>

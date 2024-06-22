@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/home/viewStudentProfile/{User_ID}/{studentId}', [KafaController::class, 'viewStudentProfile'])->name('admin.studentProfile');
         Route::get('/admin/student-profile/edit/{User_ID}/{studentId}', [KafaController::class, 'editStudentProfile'])->name('admin.editStudentProfile');
         Route::post('/admin/student-profile/update/{User_ID}/{studentId}', [KafaController::class, 'updateStudentProfile'])->name('admin.updateStudentProfile');
+        Route::delete('/admin/student-profile/delete/{User_ID}/{studentId}', [KafaController::class, 'deleteStudentProfile'])->name('admin.deleteStudentProfile');
         //student registration
         Route::get('/admin/registerStudent/{User_ID}', [KafaController::class, 'registerUserForm'])->name('admin.registerFormUser');
         Route::post('/admin/storeUser/{User_ID}', [KafaController::class, 'storeUser'])->name('admin.storeUser');
@@ -99,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware(['role:teacher'])->group(function () {
         Route::get('teacher/home/{User_ID}', [TeacherController::class, 'dashboard'])->name('teacher.home');
 
-        //manage profile muip routes
+        //manage profile teacher routes
         Route::get('teacher/home/viewStudentList/{User_ID}', [TeacherController::class, 'studentList'])->name('teacher.studentList');
         Route::get('teacher/home/viewStudentProfile/{User_ID}/{studentId}', [TeacherController::class, 'viewStudentProfile'])->name('teacher.studentProfile');
 
